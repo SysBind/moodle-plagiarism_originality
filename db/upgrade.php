@@ -28,7 +28,6 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
 
     if ($oldversion < 2023051500) {
 
-
         // Define table originality_modules to be created.
         $table = new xmldb_table('originality_modules');
         if ($dbman->table_exists($table)) {
