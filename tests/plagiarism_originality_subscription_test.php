@@ -31,7 +31,7 @@ use moodle_exception;
  *
  * @covers \plagiarism_originality_subscription
  */
-class plagiarism_originality_subscription_test extends advanced_testcase {
+class plagiarism_originality_subscription_test extends \advanced_testcase {
     /**
      * Setup to ensure that fixtures are loaded.
      */
@@ -90,7 +90,7 @@ class plagiarism_originality_subscription_test extends advanced_testcase {
      * Retrieves a subscription using the plagiarism_plugin_originality_utils service and checks its validity.
      */
     public function test_subscription() {
-        $service = plagiarism_plugin_originality_utils();
+        $service = new \plagiarism_plugin_originality_utils();
 
         // If not, then it can be used as is.
         $subscription = $service->subscription();
