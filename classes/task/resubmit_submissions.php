@@ -47,11 +47,8 @@ class resubmit_submissions extends \core\task\scheduled_task {
         global $DB;
 
         $lib = new \plagiarism_plugin_originality();
-        $updated = time() - 3600;
-        $submissions = $DB->get_records_sql('SELECT * FROM {originality_submissions}
-                                                            WHERE parent = 1 AND
-                                                                  updated >= ? AND
-                                                                  status = 0', array($updated));
+        $submissions = $DB->get_records('originality_submissions', array('status' => 0), 'updated DESC', '*', 0, 10);
+
         $tmp = [];
         if (!$submissions) {
             mtrace('Error Task: there is no any submissions to resubmit.');
