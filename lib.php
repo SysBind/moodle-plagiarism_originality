@@ -251,31 +251,29 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 'TZhash' => $data->TZhash
         );
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->utils->get_server() . 'documents',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => json_encode($raw),
-                CURLOPT_HTTPHEADER => array(
-                        'authorization: ' . $this->utils->config->secret,
-                        'cache-control: no-cache',
-                        'content-type: application/json',
-                ),
-        ));
+        $url = $this->utils->get_server() . 'documents';
+        $jsondata = json_encode($raw);
 
-        $output = curl_exec($curl);
-        $output = json_decode($output, true);
-        curl_close($curl);
+        $options = array(
+                'RETURNTRANSFER' => true,
+                'CURLOPT_MAXREDIRS' => 10,
+                'CURLOPT_TIMEOUT' => 30,
+
+        );
+
+        $header = array(
+                'authorization: ' . $this->utils->config->secret,
+                'cache-control: no-cache',
+                'content-type: application/json'
+        );
+
+        $curl = new curl();
+        $curl->setHeader($header);
+        $jsonresult = $curl->post($url, $jsondata, $options);
+        $output = json_decode($jsonresult);
 
         if (isset($output['Id'])) {
-
             $context = context_course::instance($data->courseid);
-
             $event = \plagiarism_originality\event\document_submitted::create(array('context' => $context,
                     'userid' => $data->userid));
             $event->trigger();

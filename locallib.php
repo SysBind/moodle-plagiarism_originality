@@ -95,24 +95,22 @@ class plagiarism_plugin_originality_utils {
             return false;
         }
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->get_server() . 'customers/ping',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                        'authorization: ' . $this->config->secret,
-                        'cache-control: no-cache',
-                ),
-        ));
+        $url = $this->get_server() . 'customers/ping';
+        $options = array(
+                'RETURNTRANSFER' => true,
+                'CURLOPT_MAXREDIRS' => 10,
+                'CURLOPT_TIMEOUT' => 30,
+        );
 
-        $response = curl_exec($curl);
-        $output = json_decode($response, true);
-        curl_close($curl);
+        $header = array(
+                'authorization: ' . $this->config->secret,
+                'cache-control: no-cache',
+        );
+
+        $curl = new curl();
+        $curl->setHeader($header);
+        $jsonresult = $curl->get($url, array(), $options);
+        $output = json_decode($jsonresult, true);
 
         if (!isset($output)) {
             return false;
@@ -136,34 +134,31 @@ class plagiarism_plugin_originality_utils {
             return false;
         }
 
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-                CURLOPT_URL => $this->get_server() . 'reports',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_POSTFIELDS => json_encode(array(
-                        'apiKey' => $this->config->secret,
-                        'MoodleToken' => $this->config->wstoken,
-                        'IsUpdate' => 1
-                )),
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_HTTPHEADER => array(
-                        'authorization: ' . $this->config->secret,
-                        'cache-control: no-cache',
-                        'content-type: application/json',
-                ),
-        ));
+        $data = array(
+                'apiKey' => $this->config->secret,
+                'MoodleToken' => $this->config->wstoken,
+                'IsUpdate' => 1
+        );
 
-        $response = curl_exec($curl);
-        $output = json_decode($response, true);
-        curl_close($curl);
+        $url = $this->get_server() . 'reports';
+        $jsondata = json_encode($data);
 
-        if (!isset($output)) {
-            return false;
-        }
+        $options = array(
+                'RETURNTRANSFER' => true,
+                'CURLOPT_MAXREDIRS' => 10,
+                'CURLOPT_TIMEOUT' => 30,
+        );
+
+        $header = array(
+                'authorization: ' . $this->config->secret,
+                'cache-control: no-cache',
+                'content-type: application/json',
+        );
+
+        $curl = new curl();
+        $curl->setHeader($header);
+        $jsonresult = $curl->post($url, $jsondata, $options);
+        $output = json_decode($jsonresult, true);
 
         if ($output['success']) {
             return true;
