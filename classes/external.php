@@ -41,12 +41,22 @@ class plagiarism_originality_external extends external_api {
     public static function create_report($docid, $content, $grade) {
         global $DB;
 
+        $params = self::validate_parameters(self::execute_parameters(), [
+                'docid' => $docid,
+                'content' => $content,
+                'grade' => $grade,
+        ]);
+
+        $context = context_system::instance();
+        self::validate_context($context);
+        require_capability('plagiarism/originality:manage', $context);
+
         $output = new stdClass();
         $output->utils = new plagiarism_plugin_originality_utils;
         $output->error = false;
 
         $submission = $DB->get_record('originality_submissions', array(
-                'docid' => $docid
+                'docid' => $params['docid']
         ));
 
         if (!$submission) {
@@ -55,12 +65,12 @@ class plagiarism_originality_external extends external_api {
             unset($submission->file);
             $submission->status = 2;
             $submission->updated = time();
-            $submission->grade = $grade;
+            $submission->grade = $params['grade'];
 
             $output->utils->update_submission($submission);
 
             $file = new stdClass();
-            $file->content = base64_decode($content);
+            $file->content = base64_decode($params['content']);
             $file->itemid = $submission->id;
             $output->utils->save_file($file);
         }

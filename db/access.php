@@ -24,5 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array();
-
+$capabilities = array(
+    // Whether the user can manage.
+        'plagiarism/originality:manage' => array(
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_SYSTEM,
+                'archetypes' => array(),
+                'clonepermissionsfrom' => 'moodle/site:config'
+        )
+);
