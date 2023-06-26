@@ -22,30 +22,36 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Originality - Plagiarism Detection';
-$string['originality'] = 'Originality - Document Plagiarism Detection';
-$string['originality_help'] = 'Enable plagiarism detection for text-based assignments. Do not use it for assignments in different languages or for engineering assignments, as the mechanism is not designed for that.';
+$string['pluginname'] = 'Originality - plagiarism detection';
+$string['originality'] = 'Originality - document plagiarism detection';
+$string['originality_help'] =
+        'Enable plagiarism detection for text-based assignments. do not use it for assignments in different languages or for engineering assignments, as the mechanism is not designed for that.';
 $string['originality_shortname'] = 'Originality';
-$string['plugin_server_type'] = 'Originality Server';
-$string['plugin_settings'] = 'Originality Settings';
-$string['plugin_enabled'] = 'Enable the plugin';
-$string['plugin_connected'] = 'Valid API key, connected to the Originality system';
-$string['student_disclosure'] = "You must mark √ in the appropriate place to submit the assignment for originality check. Without marking this, the submission of this assignment will not be possible.<br>This submission is original, it belongs to me, was prepared by me, and I take responsibility for the originality of the content written in it.<br><br>Except for the places where I have indicated that the work was done by others and there is a relevant link in the bibliography or in the required place.<br><br>I am aware and agree that this assignment will be checked for literary theft detection by the company Originality, and I agree to the <a rel='external' href='https://www.originality.co.il/termsOfUse.html' target='_blank' style='text-decoration:underline'>Terms of Use</a>.";
-$string['secret'] = 'Access Key';
-$string['key'] = 'Access Key';
-$string['key_help'] = 'To use this plugin, you need an access key.';
+$string['plugin_server_type'] = 'Originality server';
+$string['plugin_settings'] = 'Originality settings';
+$string['plugin_enabled'] = 'Enable THE PLUGIN';
+$string['plugin_connected'] = 'Valid API key, connected to the originality system';
+$string['student_disclosure'] =
+        "You must mark √ in the appropriate place to submit the assignment for originality check. without marking this, the submission of this assignment will not be possible.<br>this submission is original, it belongs to me, was prepared by me, and i take responsibility for the originality of the content written in it.<br><br>except for the places where i have indicated that the work was done by others and there is a relevant link in the bibliography or in the required place.<br><br>i am aware and agree that this assignment will be checked for literary theft detection by the company originality, and i agree to the <a rel='external' href='https://www.originality.co.il/termsofuse.html' target='_blank' style='text-decoration:underline'>terms of use</a>.";
+$string['secret'] = 'Access secret';
+$string['key'] = 'Access key';
+$string['key_help'] = 'To USE THIS PLUGIN, YOU NEED AN ACCESS KEY.';
 $string['saved_failed'] = 'Invalid access key entered, the plugin is not active.';
 $string['checking_inprocessmsg'] = 'In progress';
 $string['checking_unprocessable'] = 'Unprocessable';
 $string['submitted_before_activation'] = 'Submitted before plugin activation';
-$string['service_is_inactive'] = 'Originality plugin is inactive. Please contact your Moodle administrator.';
-$string['warning_message'] = "You must check the consent box ('I am aware and agree') to enable the submit button.";
-$string['previous_submissions'] = 'Existing submissions already made. These students need to resubmit for their work to be checked for originality.';
-$string['production_endpoint'] = '<b>Production Server</b>&nbsp;&nbsp;<span style="font-size:14px;">Submit assignments to the Originality production server.</span>';
-$string['test_endpoint'] = '<b>Test Server</b>&nbsp;&nbsp;<span style="font-size:14px;">Submit assignments to the Originality test server. Select this option only after coordinating with Originality.</span>';
-$string['check_ghostwriter'] = 'Ghostwriter Detection for Large Assignments';
-$string['check_ghostwriter_help'] = 'You can enable this component only after coordinating with Originality. Without prior coordination, the component will not function.';
-$string['check_ghostwriter_label'] = 'Ghostwriter Detection';
+$string['service_is_inactive'] = 'Originality plugin is inactive. please contact your moodle administrator.';
+$string['warning_message'] = "You must check the consent box ('i am aware and agree') to enable the submit button.";
+$string['previous_submissions'] =
+        'Existing submissions already made. these students need to resubmit for their work to be checked for originality.';
+$string['production_endpoint'] =
+        '<b>production server</b>&nbsp;&nbsp;<span style="font-size:14px;">submit assignments to the originality production server.</span>';
+$string['test_endpoint'] =
+        '<b>test server</b>&nbsp;&nbsp;<span style="font-size:14px;">submit assignments to the originality test server. select this option only after coordinating with originality.</span>';
+$string['check_ghostwriter'] = 'Ghostwriter detection for large assignments';
+$string['check_ghostwriter_help'] =
+        'You can enable this component only after coordinating with originality. without prior coordination, the component will not function.';
+$string['check_ghostwriter_label'] = 'Ghostwriter detection';
 $string['ghostwriter_enabled'] = 'Enable ghostwriter detection';
 $string['ghostwriter_failed_message'] = 'Ghostwriter detection cannot be performed for online text.';
 $string['pdf:filename'] = 'PDF';
