@@ -38,4 +38,3 @@ $observers = array(
                 'callback' => 'plagiarism_originality_observer::assignsubmission_submitted'
         )
 );
-

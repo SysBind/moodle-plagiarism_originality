@@ -47,7 +47,7 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
         );
         $pluginelement->add_child($mods);
         $mods->add_child($mod);
-        $mod->set_source_table('originality_modules', array('cm' => backup::VAR_PARENTID));
+        $mod->set_source_table('plagiarism_originality_mod', array('cm' => backup::VAR_PARENTID));
 
         return $plugin;
     }

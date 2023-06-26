@@ -28,28 +28,28 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
 
     if ($oldversion < 2023051500) {
 
-        // Define table originality_modules to be created.
-        $table = new xmldb_table('originality_modules');
+        // Define table plagiarism_originality_mod to be created.
+        $table = new xmldb_table('plagiarism_originality_mod');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'originality_modules_old');
+            $dbman->rename_table($table, 'plagiarism_originality_mod_old');
         }
 
-        // Adding fields to table originality_modules.
+        // Adding fields to table plagiarism_originality_mod.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('cm', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
         $table->add_field('ischeck', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
         $table->add_field('ischeckgw', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
 
-        // Adding keys to table originality_modules.
+        // Adding keys to table plagiarism_originality_mod.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
         $table->add_key('cm', XMLDB_KEY_FOREIGN, ['cm'], 'course_modules', ['id']);
 
-        // Conditionally launch create table for originality_modules.
+        // Conditionally launch create table for plagiarism_originality_mod.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
-        // Define table originality_submissions to be created.
+        // Define table plagiarism_orginality_sub to be created.
         $table = new xmldb_table('originality_submissions');
         if ($dbman->table_exists($table)) {
             $dbman->rename_table($table, 'originality_submissions_old');

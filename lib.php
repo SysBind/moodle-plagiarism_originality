@@ -50,7 +50,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $output->file = (isset($linkarray['file']) && is_object($linkarray['file'])) ? $linkarray['file'] : false;
         $output->content = (isset($linkarray['content'])) ? $linkarray['content'] : false;
         $output->cm = get_coursemodule_from_id('assign', $output->cmid);
-        $output->allow = $DB->get_record('originality_modules', ['cm' => $output->cmid]);
+        $output->allow = $DB->get_record('plagiarism_originality_mod', ['cm' => $output->cmid]);
 
         // Check if plagiarism detection is enabled, user is a student, course module exists,
         // plagiarism checking is allowed, and user ID is provided.
@@ -87,7 +87,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $token = md5($output->content);
 
             if ($output->userid == 0 && $token) {
-                $groups = $DB->get_records('originality_groups', [
+                $groups = $DB->get_records('plagiarism_orginality_groups', [
                         'token' => $token,
                         'assignment' => $output->cm->instance
                 ], 'id DESC', 'id, userid', 0, 1);
@@ -174,7 +174,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
     public function print_disclosure($cmid) {
         global $OUTPUT, $PAGE, $DB;
 
-        $existing = $DB->get_record('originality_modules', array('cm' => $cmid));
+        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cmid));
         if ($PAGE->pagetype == 'mod-forum-post' ||
                 !$this->utils->is_enabled() || !$existing) {
             return;
@@ -384,7 +384,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             return $result;
         }
 
-        $existing = $DB->get_record('originality_modules', array('cm' => $eventdata['contextinstanceid']));
+        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $eventdata['contextinstanceid']));
         if ($existing && $existing->ischeck) {
             $modulecontext = context_module::instance($eventdata['contextinstanceid']);
             $fs = get_file_storage();
@@ -471,7 +471,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             return $result;
         }
 
-        $existing = $DB->get_record('originality_modules', array('cm' => $eventdata['contextinstanceid']));
+        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $eventdata['contextinstanceid']));
         if ($existing && $existing->ischeck) {
 
             $params = $this->get_submission_params($eventdata);
@@ -488,7 +488,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                     $data->userid = $params->userid;
                     $data->groupid = $assignsubmission->groupid;
                     $data->token = md5($content);
-                    $DB->insert_record('originality_groups', $data);
+                    $DB->insert_record('plagiarism_orginality_groups', $data);
                 }
 
                 $params->content = strip_tags($content);
@@ -567,7 +567,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $assign = $DB->get_record('assign', array('id' => $params->assignnum), 'id', IGNORE_MISSING);
         $params->realassignnum = ($assign) ? $assign->id : null;
 
-        $existing = $DB->get_record('originality_modules', array('cm' => $params->cmid));
+        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $params->cmid));
         $params->ghostwritercheck = ($existing && $existing->ischeckgw) ? 1 : 0;
 
         return $params;
@@ -726,7 +726,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
             }
         }
 
-        $existing = $DB->get_record('originality_modules', array('cm' => $cm->id));
+        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cm->id));
 
         $mform->addElement('header', 'originalitydesc', get_string('originality', 'plagiarism_originality'));
         $mform->addHelpButton('originalitydesc', 'originality', 'plagiarism_originality');
@@ -784,7 +784,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
 function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
     global $DB;
 
-    $existing = $DB->get_record('originality_modules', array('cm' => $data->coursemodule));
+    $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $data->coursemodule));
     if (!$existing) {
 
         $current = new stdClass();
@@ -792,11 +792,11 @@ function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
         $current->ischeck = $data->originality_use;
         $current->ischeckgw = ($data->originality_use_ghostwriter ? $data->originality_use_ghostwriter : 0);
 
-        $DB->insert_record('originality_modules', $current);
+        $DB->insert_record('plagiarism_originality_mod', $current);
     } else {
         $existing->ischeck = $data->originality_use;
         $existing->ischeckgw = ($data->originality_use_ghostwriter ? $data->originality_use_ghostwriter : 0);
-        $DB->update_record('originality_modules', $existing);
+        $DB->update_record('plagiarism_originality_mod', $existing);
     }
 
     return $data;

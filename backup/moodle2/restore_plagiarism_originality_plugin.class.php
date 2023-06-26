@@ -36,7 +36,7 @@ class restore_plagiarism_originality_plugin extends restore_plagiarism_plugin {
         $data = (object) $data;
         $data->cm = $this->task->get_moduleid();
 
-        $DB->insert_record('originality_modules', $data);
+        $DB->insert_record('plagiarism_originality_mod', $data);
     }
 
     public function after_restore_module() {

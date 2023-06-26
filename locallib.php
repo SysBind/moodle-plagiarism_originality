@@ -242,7 +242,7 @@ class plagiarism_plugin_originality_utils {
     public function set_submission($data) {
         global $DB;
 
-        $status = $DB->insert_record('originality_submissions', $data);
+        $status = $DB->insert_record('plagiarism_orginality_sub', $data);
 
         return $status;
     }
@@ -259,14 +259,14 @@ class plagiarism_plugin_originality_utils {
 
         if (!$all) {
             $data['ghostwriter'] = 0;
-            $tmp = $DB->get_records('originality_submissions', $data, 'id DESC', '*', 0, 1);
+            $tmp = $DB->get_records('plagiarism_orginality_sub', $data, 'id DESC', '*', 0, 1);
 
             $data['ghostwriter'] = 1;
-            $temp = $DB->get_records('originality_submissions', $data, 'id DESC', '*', 0, 1);
+            $temp = $DB->get_records('plagiarism_orginality_sub', $data, 'id DESC', '*', 0, 1);
 
             $output = array_merge($tmp, $temp);
         } else {
-            $output = $DB->get_records('originality_submissions', $data, 'created DESC', '*', 0, 1000);
+            $output = $DB->get_records('plagiarism_orginality_sub', $data, 'created DESC', '*', 0, 1000);
         }
 
         return $output;
@@ -280,7 +280,7 @@ class plagiarism_plugin_originality_utils {
      */
     public function update_submission($data) {
         global $DB;
-        $status = $DB->update_record('originality_submissions', $data);
+        $status = $DB->update_record('plagiarism_orginality_sub', $data);
 
         return $status;
     }
