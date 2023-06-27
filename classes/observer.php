@@ -26,8 +26,25 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/plagiarism/originality/lib.php');
 
+/**
+ * Observer functions
+ *
+ * @package    plagiarism_originality
+ * @category   admin
+ * @copyright  2023 mattandor <mattan@centricapp.co>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @since      Moodle 3.0
+ */
 class plagiarism_originality_observer {
 
+    /**
+     * Handles the event triggered when a file is uploaded for assessable submission in the File Submission assignment type.
+     * This function is responsible for processing the event data and invoking the appropriate functionality to handle the
+     * originality check for the uploaded file.
+     *
+     * @param \assignsubmission_file\event\assessable_uploaded $event The event object containing the uploaded file data.
+     * @return void
+     */
     public static function assignsubmission_file_uploaded(
             \assignsubmission_file\event\assessable_uploaded $event) {
         $eventdata = $event->get_data();
@@ -35,6 +52,14 @@ class plagiarism_originality_observer {
         $originality->originality_event_file_uploaded($eventdata);
     }
 
+    /**
+     * Handles the event triggered when an assessable submission is submitted in the Assignment module.
+     * This function is responsible for processing the event data and invoking the appropriate functionality to handle the
+     * originality check for the submitted assignment.
+     *
+     * @param \mod_assign\event\assessable_submitted $event The event object containing the submitted assignment data.
+     * @return void
+     */
     public static function assignsubmission_submitted(
             \mod_assign\event\assessable_submitted $event) {
         $eventdata = $event->get_data();
@@ -42,6 +67,14 @@ class plagiarism_originality_observer {
         $originality->originality_event_submitted($eventdata);
     }
 
+    /**
+     * Handles the event triggered when online text is uploaded for assessable submission in the Online Text Submission assignment
+     * type. This function is responsible for processing the event data and invoking the appropriate functionality to handle the
+     * originality check for the uploaded online text.
+     * @param \assignsubmission_onlinetext\event\assessable_uploaded $event The event object containing the uploaded online text
+     *         data.
+     * @return void
+     */
     public static function assignsubmission_onlinetext_uploaded(
             \assignsubmission_onlinetext\event\assessable_uploaded $event) {
         $eventdata = $event->get_data();

@@ -18,10 +18,17 @@
  * plagiarism_originality locallib
  *
  * @package    plagiarism_originality
+ * @category   admin
  * @copyright  2023 mattandor <mattan@centricapp.co>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class plagiarism_plugin_originality_utils {
+
+    /**
+     * Constructor function for the class.
+     * Initializes the configuration settings for the plagiarism_originality plugin.
+     * @return void
+     */
     public function __construct() {
         $this->config = get_config('plagiarism_originality');
     }

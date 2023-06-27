@@ -22,6 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Upgrade function for the plagiarism_originality plugin.
+ * This function performs the necessary database upgrades based on the old version of the plugin.
+ * @param int $oldversion The old version of the plugin.
+ * @return bool Returns true if the upgrade is successful, false otherwise.
+ */
 function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
     global $DB, $CFG;
     $dbman = $DB->get_manager();

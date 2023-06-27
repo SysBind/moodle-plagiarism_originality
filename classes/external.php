@@ -29,7 +29,23 @@ global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/plagiarism/originality/locallib.php');
 
+/**
+ * External functions
+ *
+ * @package    plagiarism_originality
+ * @category   external
+ * @copyright  2023 mattandor <mattan@centricapp.co>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @since      Moodle 3.0
+ */
 class plagiarism_originality_external extends external_api {
+
+    /**
+     * Returns the expected parameters for the create_report function.
+     * This function defines the expected parameters for the create_report function. It specifies the data types and descriptions
+     * of each parameter.
+     * @return external_function_parameters The parameters expected by the create_report function.
+     */
     public static function create_report_parameters() {
         return new external_function_parameters([
                 'docId' => new external_value(PARAM_ALPHANUM, 'A document ID value for ordering the entries.'),
@@ -38,6 +54,17 @@ class plagiarism_originality_external extends external_api {
         ]);
     }
 
+    /**
+     * Creates a report for a document.
+     * This function creates a report for a document based on the provided parameters. It validates the parameters, checks the
+     * user's context and capability, and performs necessary database operations to update the submission and save the file. The
+     * resulting report is returned as an output object.
+     *
+     * @param int $docid The ID of the document for which the report is created.
+     * @param string $content The content of the report.
+     * @param int $grade The grade assigned to the document.
+     * @return stdClass The output object containing the created report information.
+     */
     public static function create_report($docid, $content, $grade) {
         global $DB;
 
@@ -78,6 +105,13 @@ class plagiarism_originality_external extends external_api {
         return $output;
     }
 
+    /**
+     * Returns the expected structure of the output for the create_report function.
+     * This function defines the structure of the output that the create_report function will return. It indicates whether an error
+     * occurred during the operation.
+     *
+     * @return external_single_structure The structure of the output, including the error field.
+     */
     public static function create_report_returns() {
         return new external_single_structure([
                 'error' => new external_value(PARAM_BOOL, 'Indicates whether an error occurred during the operation.', true)

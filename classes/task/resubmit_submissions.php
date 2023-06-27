@@ -29,6 +29,15 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/plagiarism/originality/lib.php');
 require_once($CFG->dirroot . '/plagiarism/originality/locallib.php');
 
+/**
+ * scheduled_task functions
+ *
+ * @package    plagiarism_originality
+ * @category   admin
+ * @copyright  2023 mattandor <mattan@centricapp.co>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @since      Moodle 3.0
+ */
 class resubmit_submissions extends \core\task\scheduled_task {
 
     /**

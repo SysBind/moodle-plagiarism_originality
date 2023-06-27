@@ -29,7 +29,21 @@ require_once($CFG->dirroot . '/plagiarism/lib.php');
 require_once($CFG->dirroot . '/mod/assign/locallib.php');
 require_once($CFG->dirroot . '/plagiarism/originality/locallib.php');
 
+/**
+ * lib functions
+ *
+ * @package    plagiarism_originality
+ * @category   admin
+ * @copyright  2023 mattandor <mattan@centricapp.co>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class plagiarism_plugin_originality extends plagiarism_plugin {
+
+    /**
+     * Constructor function for the class.
+     * Initializes the plagiarism_plugin_originality_utils object for accessing utility functions.
+     * @return void
+     */
     public function __construct() {
         $this->utils = new plagiarism_plugin_originality_utils;
     }

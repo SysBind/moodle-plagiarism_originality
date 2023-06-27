@@ -18,11 +18,18 @@
  * plagiarism_originality restore.
  *
  * @package    plagiarism_originality
+ * @category   backup
  * @copyright  2023 mattandor <mattan@centricapp.co>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_plagiarism_originality_plugin extends restore_plagiarism_plugin {
 
+    /**
+     * Defines the module plugin structure for the restore process.
+     * This function specifies the paths to be restored for the module plugin.
+     *
+     * @return array An array of restore_path_element objects representing the paths to be restored.
+     */
     protected function define_module_plugin_structure() {
         $paths = array();
         $paths[] = new restore_path_element('originality_mods', $this->get_pathfor('originality_mods/originality_mod'));
@@ -30,6 +37,13 @@ class restore_plagiarism_originality_plugin extends restore_plagiarism_plugin {
         return $paths;
     }
 
+    /**
+     * Processes the originality_mods data during the restore process.
+     * This function inserts the originality_mods data into the 'plagiarism_originality_mod' table.
+     *
+     * @param array $data The originality_mods data to be processed.
+     * @return void
+     */
     public function process_originality_mods($data) {
         global $DB;
 
@@ -39,7 +53,13 @@ class restore_plagiarism_originality_plugin extends restore_plagiarism_plugin {
         $DB->insert_record('plagiarism_originality_mod', $data);
     }
 
+    /**
+     * Performs actions after the restoration of the module.
+     * This function is called after the module has been successfully restored.
+     * It can be used to perform any additional actions or cleanup tasks.
+     *
+     * @return void
+     */
     public function after_restore_module() {
-        global $DB, $SESSION;
     }
 }

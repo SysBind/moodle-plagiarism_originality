@@ -15,8 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * /**
- * plagiarism_originality document submitted event .
+ * plagiarism_originality document submitted event.
  *
  * @package    plagiarism_originality
  * @copyright  2023 mattandor <mattan@centricapp.co>
