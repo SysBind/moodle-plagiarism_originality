@@ -65,18 +65,20 @@ define(['jquery'],
                     }
                 });
 
-                if (originality_status == 2)
+                if (originality_status == 2) {
                     that.setLimit();
+                }
 
                 originality_dropdown.change(function () {
                     var base = $(this),
                         status = base.val(),
                         msg = $('#assignment_has_submissions_notifications');
 
-                    if (status == 2)
+                    if (status == 2) {
                         that.setLimit();
-                    else
+                    } else {
                         that.unsetLimit();
+                    }
 
                     if (status == 1) {
                         $('.originality-message').toggle(true);
@@ -106,16 +108,18 @@ define(['jquery'],
                         if (!isChecked) {
                             e.preventDefault();
                             require(['core/notification'], function (notification) {
-                                notification.alert('Originality Warning', $('.core-notification msg').text(), $('.core-notification btn').text());
+                                notification.alert('Originality Warning',
+                                    $('.core-notification msg').text(), $('.core-notification btn').text());
                             });
                             return;
                         }
                     });
 
-                    $('#region-main #originality-checkbox').click(function (e) {
+                    $('#region-main #originality-checkbox').click(function () {
                         var isChecked = $(this).is(':checked');
                         $('.originality-checkbox-form').remove();
-                        $('.mform').prepend('<input type="hidden" value="' + isChecked + '" class="originality-checkbox-form" name="originality-checkbox-form">');
+                        $('.mform').prepend('<input type="hidden" value="' + isChecked + '" ' +
+                            'class="originality-checkbox-form" name="originality-checkbox-form">');
                     });
                 }
             }
