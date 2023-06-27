@@ -102,7 +102,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
             $eventdata['userid'] = $submission->userid;
             $eventdata['assignNum'] = $submission->assignment;
 
-            if ($submission->moodle_file_id < 0) {
+            if ($submission->fileid < 0) {
                 $onlinetext = $DB->get_record('assignsubmission_onlinetext',
                         array('assignment' => $submission->assignment, 'submission' => $submissionid[0]));
 

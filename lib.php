@@ -42,6 +42,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
     /**
      * Constructor function for the class.
      * Initializes the plagiarism_plugin_originality_utils object for accessing utility functions.
+     *
      * @return void
      */
     public function __construct() {
@@ -91,8 +92,8 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             // Submissions with files attached.
             $submissions = $this->utils->get_submission([
                     'assignment' => $output->cm->instance,
-                    'actual_userid' => $output->userid,
-                    'moodle_file_id' => $fileid,
+                    'actualuserid' => $output->userid,
+                    'fileid' => $fileid,
             ]);
 
         } else if ($output->content) {
@@ -115,7 +116,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $submissions = $this->utils->get_submission([
                     'assignment' => $output->cm->instance,
                     'userid' => $output->userid,
-                    'moodle_file_id' => '-1',
+                    'fileid' => '-1',
             ]);
         }
 
@@ -286,13 +287,13 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $jsonresult = $curl->post($url, $jsondata, $options);
         $output = json_decode($jsonresult);
 
-        if (isset($output['Id'])) {
+        if (isset($output->Id)) {
             $context = context_course::instance($data->courseid);
             $event = \plagiarism_originality\event\document_submitted::create(array('context' => $context,
                     'userid' => $data->userid));
             $event->trigger();
 
-            return $output['Id'];
+            return $output->Id;
         } else {
             return false;
         }
@@ -440,9 +441,10 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                         $params->filepath = $filepath;
 
                         $uploadresult = $this->make_call($params);
+
                         if (!$resubmission) {
                             $this->add_document($params->assignnum, $params->userid, $params->actualuserid, $filename,
-                                    $fileid, $uploadresult, $params->ghostwritercheck, $eventdata['objectid']);
+                                    $fileid, $uploadresult, $params->ghostwritercheck, $eventdata['objectid'], $params->cmid);
                         }
                     }
                 }
@@ -512,7 +514,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 $uploadresult = $this->make_call($params);
                 if (!$resubmission) {
                     $this->add_document($params->assignnum, $params->userid, $params->actualuserid, $filename, -1,
-                            $uploadresult, $params->ghostwritercheck, $eventdata['objectid']);
+                            $uploadresult, $params->ghostwritercheck, $eventdata['objectid'], $params->cmid);
                 }
             }
         }
@@ -636,24 +638,26 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
      * Add a request record to the database.
      *
      * @param int $assignnum The assignment number.
-     * @param int $userid The ID of the user making the request.
-     * @param int $actualuserid The actual ID of the user making the request.
-     * @param string $filename The name of the file.
-     * @param int $moodlefileid The ID of the Moodle file associated with the request.
-     * @param string $uploadresult The result of the file upload.
-     * @param bool $ghostwriter Whether the request is related to a ghostwriter or not.
-     * @param int $objectid The ID of the object associated with the request.
+     * @param int $userid The user ID of the submitter.
+     * @param int $actualuserid The actual user ID (if different from the submitter).
+     * @param string $filename The name of the file being submitted.
+     * @param int $moodlefileid The Moodle file ID associated with the submitted file.
+     * @param int $uploadresult The result of the file upload operation.
+     * @param bool $ghostwriter Whether a ghostwriter was involved in the submission.
+     * @param int $objectid The ID of the object associated with the submission.
+     * @param int $cm The course module ID.
      * @return void
      */
     private function add_document($assignnum, $userid, $actualuserid, $filename, $moodlefileid, $uploadresult, $ghostwriter,
-            $objectid) {
+            $objectid, $cm) {
         $submission = new stdClass();
         $submission->assignment = $assignnum;
         $submission->userid = $userid;
-        $submission->actual_userid = $actualuserid;
+        $submission->actualuserid = $actualuserid;
         $submission->file = $filename;
-        $submission->moodle_file_id = $moodlefileid;
+        $submission->fileid = $moodlefileid;
         $submission->status = 0;
+        $submission->cm = $cm;
 
         if ($uploadresult) {
             $submission->docid = $uploadresult;

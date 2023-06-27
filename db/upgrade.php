@@ -65,12 +65,12 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('assignment', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
         $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('actual_userid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('actualuserid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
         $table->add_field('docid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
         $table->add_field('ghostwriter', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
         $table->add_field('file', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('file_report', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('moodle_file_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('filename', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('fileid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
         $table->add_field('status', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
         $table->add_field('grade', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
         $table->add_field('attempts', XMLDB_TYPE_INTEGER, '5', null, null, null, '0');

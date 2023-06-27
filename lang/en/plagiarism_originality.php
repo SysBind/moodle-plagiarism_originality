@@ -29,7 +29,7 @@ $string['originality_help'] =
 $string['originality_shortname'] = 'Originality';
 $string['plugin_server_type'] = 'Originality server';
 $string['plugin_settings'] = 'Originality settings';
-$string['plugin_enabled'] = 'Enable THE PLUGIN';
+$string['plugin_enabled'] = 'Enable plugin';
 $string['plugin_connected'] = 'Valid API key, connected to the originality system';
 $string['student_disclosure'] =
         "You must mark √ in the appropriate place to submit the assignment for originality check. without marking this, the submission of this assignment will not be possible.<br>this submission is original, it belongs to me, was prepared by me, and i take responsibility for the originality of the content written in it.<br><br>except for the places where i have indicated that the work was done by others and there is a relevant link in the bibliography or in the required place.<br><br>i am aware and agree that this assignment will be checked for literary theft detection by the company originality, and i agree to the <a rel='external' href='https://www.originality.co.il/termsofuse.html' target='_blank' style='text-decoration:underline'>terms of use</a>.";

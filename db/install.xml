@@ -19,14 +19,15 @@
         <TABLE NAME="plagiarism_originality_sub" COMMENT="Default comment for the table, please edit me">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="cm" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-                <FIELD NAME="actual_userid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="actualuserid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="docid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="ghostwriter" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="file" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-                <FIELD NAME="file_report" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-                <FIELD NAME="moodle_file_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="filename" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="fileid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="attempts" TYPE="int" LENGTH="5" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
