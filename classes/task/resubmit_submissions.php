@@ -56,7 +56,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
         global $DB;
 
         $lib = new \plagiarism_plugin_originality();
-        $submissions = $DB->get_records('plagiarism_orginality_sub', array('status' => 0), 'updated DESC', '*', 0, 10);
+        $submissions = $DB->get_records('plagiarism_originality_sub', array('status' => 0), 'updated DESC', '*', 0, 10);
 
         $tmp = [];
         if (!$submissions) {

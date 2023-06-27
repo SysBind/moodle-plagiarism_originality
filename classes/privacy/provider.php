@@ -24,13 +24,49 @@
 
 namespace plagiarism_originality\privacy;
 
+use core_privacy\local\metadata\collection;
+use core_privacy\local\request\approved_contextlist;
+use core_privacy\local\request\approved_userlist;
+use core_privacy\local\request\contextlist;
+use core_privacy\local\request\helper;
+use core_privacy\local\request\transform;
+use core_privacy\local\request\userlist;
+use core_privacy\local\request\writer;
+
 /**
  * Privacy Subsystem for plagiarism_originality implementing null_provider.
  *
  * @copyright  2023 mattandor <mattan@centricapp.co>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+class provider implements
+        // This plugin has data.
+        core_privacy\local\metadata\provider,
+
+        // This plugin currently implements the original plugin\provider interface.
+        core_privacy\local\request\plugin\provider,
+
+        // This plugin is capable of determining which users have data within it.
+        core_privacy\local\request\core_userlist_provider {
+
+    /**
+     * Returns metadata.
+     *
+     * @param collection $collection The initialised collection to add items to.
+     * @return collection A listing of user data stored through this system.
+     */
+    public static function get_metadata(collection $collection): collection {
+
+        $collection->add_database_table('plagiarism_originality_sub', [
+                'userid' => 'privacy:metadata:plagiarism_originality_sub:userid',
+        ], 'privacy:metadata:plagiarism_originality_sub');
+
+        $collection->add_external_location_link('originality', [
+                'data' => 'privacy:metadata:originality:data'
+        ], 'privacy:metadata:originality:externalpurpose');
+
+        return $collection;
+    }
 
     /**
      * Get the language string identifier with the component's language

@@ -56,3 +56,7 @@ $string['ghostwriter_enabled'] = 'Enable ghostwriter detection';
 $string['ghostwriter_failed_message'] = 'Ghostwriter detection cannot be performed for online text.';
 $string['pdf:filename'] = 'PDF';
 $string['default_settings_assignments'] = 'Enable detection for new assignments';
+$string['privacy:metadata:aicc:data'] = 'Personal data passed through from subsystem.';
+$string['privacy:metadata:aicc:externalpurpose'] = 'This plugin sends data externally.';
+$string['privacy:metadata:plagiarism_originality_sub'] = 'Personal data from subs table';
+$string['privacy:metadata:plagiarism_originality_sub:userid'] = 'Personal userid data from subs table';

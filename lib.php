@@ -101,7 +101,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $token = md5($output->content);
 
             if ($output->userid == 0 && $token) {
-                $groups = $DB->get_records('plagiarism_orginality_groups', [
+                $groups = $DB->get_records('plagiarism_originality_grp', [
                         'token' => $token,
                         'assignment' => $output->cm->instance
                 ], 'id DESC', 'id, userid', 0, 1);
@@ -502,7 +502,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                     $data->userid = $params->userid;
                     $data->groupid = $assignsubmission->groupid;
                     $data->token = md5($content);
-                    $DB->insert_record('plagiarism_orginality_groups', $data);
+                    $DB->insert_record('plagiarism_originality_grp', $data);
                 }
 
                 $params->content = strip_tags($content);
