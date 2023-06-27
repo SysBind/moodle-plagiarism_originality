@@ -39,7 +39,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="plagiarism_originality_groups" COMMENT="Default comment for the table, please edit me">
+        <TABLE NAME="plagiarism_originality_grp" COMMENT="Default comment for the table, please edit me">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
