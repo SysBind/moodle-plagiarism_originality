@@ -45,8 +45,9 @@ define(['jquery'],
                                 el.find('[type=text]').val(allow_files_ghostwriter).attr('readonly', true);
                                 el.find('[type=button]').attr('disabled', true);
                             }
-                            if (el.find('[type=button]').length > 0)
+                            if (el.find('[type=button]').length > 0) {
                                 clearInterval(ghostinit);
+                            }
                         }
                     }, 2000);
 
