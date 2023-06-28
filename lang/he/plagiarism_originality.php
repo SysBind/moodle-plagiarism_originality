@@ -24,13 +24,15 @@
 
 $string['pluginname'] = 'דרוג מקוריות - גילוי העתקות';
 $string['originality'] = 'רכיב דרוג מקוריות מסמכים - גילוי העתקות';
-$string['originality_help'] = 'התקן לגילוי העתקות בעבודות מלל (טקסט). אין להשתמש עבור עבודות בשפה אחרת או בעבודות הנדסיות שונות כי המנגנון לא בנוי לכך.';
+$string['originality_help'] =
+        'התקן לגילוי העתקות בעבודות מלל (טקסט). אין להשתמש עבור עבודות בשפה אחרת או בעבודות הנדסיות שונות כי המנגנון לא בנוי לכך.';
 $string['originality_shortname'] = 'מקוריות';
 $string['plugin_server_type'] = 'שרת מקוריות';
 $string['plugin_settings'] = 'מאפיינים של מקוריות';
 $string['plugin_enabled'] = 'הפעלת הרכיב';
 $string['plugin_connected'] = 'מזהה מפתח תקין, מחובר למערכת מקוריות';
-$string['student_disclosure'] = "עליך לסמן √ במקום המתאים עבור שליחת המטלה לבדיקת מקוריות. ללא סימון זה לא יהיה ניתן להגיש עבודה זו.<br>הגשה זו היא מקורית, שייכת לי, נערכה בידיי ובהגשתי זו אני לוקח/ת אחריות על מקוריות הכתוב בתוכה.<br><br>למעט המקומות שבהם ציינתי שהעבודה נעשתה עי אחרים וקישור מתאים נמצא בביבליוגרפיה או במקום הדרוש לכך.<br><br>אני מודע/ת ומסכים/ה שמטלה זו תיבדק לגילוי גניבה ספרותית על ידי חברת מקוריות ואני מסכים/ה <a rel='external' href='https://www.originality.co.il/termsOfUse.html' target='_blank' style='text-decoration:underline'>לתנאי  השימוש</a>.";
+$string['student_disclosure'] =
+        "עליך לסמן √ במקום המתאים עבור שליחת המטלה לבדיקת מקוריות. ללא סימון זה לא יהיה ניתן להגיש עבודה זו.<br>הגשה זו היא מקורית, שייכת לי, נערכה בידיי ובהגשתי זו אני לוקח/ת אחריות על מקוריות הכתוב בתוכה.<br><br>למעט המקומות שבהם ציינתי שהעבודה נעשתה עי אחרים וקישור מתאים נמצא בביבליוגרפיה או במקום הדרוש לכך.<br><br>אני מודע/ת ומסכים/ה שמטלה זו תיבדק לגילוי גניבה ספרותית על ידי חברת מקוריות ואני מסכים/ה <a rel='external' href='https://www.originality.co.il/termsOfUse.html' target='_blank' style='text-decoration:underline'>לתנאי  השימוש</a>.";
 $string['secret'] = 'מפתח שימוש';
 $string['key'] = 'מפתח שימוש';
 $string['key_help'] = 'על מנת להשתמש ברכיב עליך להיות בעל מפתח שימוש';
@@ -41,12 +43,19 @@ $string['submitted_before_activation'] = 'הוגש לפני הפעלת הרכי�
 $string['service_is_inactive'] = 'רכיב מקוריות אינו פעיל. יש לפנות אל אחראי מוודל.';
 $string['warning_message'] = "יש לסמן את כפתור ההסכמה ('אני מודע ומסכים') על מנת להפעיל את כפתור השליחה";
 $string['previous_submissions'] = 'קיימות עבודות שהוגשו כבר. על הסטודנטים האלה להגיש שנית על מנת שמקוריות עבודתם תיבדק.';
-$string['production_endpoint'] = '<b>שרת מקוריות</b>&nbsp;&nbsp;<span style="font-size:14px;">לשלוח את העבודות לשרת היצור של מקוריות.</span>';
-$string['test_endpoint'] = '<b>שרת ניסוי</b>&nbsp;&nbsp;<span style="font-size:14px;">לשלוח את העבודות לשרת הניסוי (טסט) של מקוריות. יש לבחור זאת רק לאחר תיאום עם מקוריות.</span>';
+$string['production_endpoint'] =
+        '<b>שרת מקוריות</b>&nbsp;&nbsp;<span style="font-size:14px;">לשלוח את העבודות לשרת היצור של מקוריות.</span>';
+$string['test_endpoint'] =
+        '<b>שרת ניסוי</b>&nbsp;&nbsp;<span style="font-size:14px;">לשלוח את העבודות לשרת הניסוי (טסט) של מקוריות. יש לבחור זאת רק לאחר תיאום עם מקוריות.</span>';
 $string['check_ghostwriter'] = 'רכיב גילוי כותב צללים לעבודות גדולות';
 $string['check_ghostwriter_help'] = 'ניתן להפעיל רכיב זה רק לאחר תיאום עם חברת מקוריות. ללא תיאום מראש, הרכיב לא יפעל.';
 $string['check_ghostwriter_label'] = 'כותב צללים';
 $string['ghostwriter_enabled'] = 'הפעל בדיקת כותב צללים';
 $string['ghostwriter_failed_message'] = 'לא ניתן לבצע בדיקת צללים עבור מלל מקוון';
 $string['pdf:filename'] = 'PDF';
+$string['originality_unsupported_file'] = 'קובץ אינו נתמך.';
 $string['default_settings_assignments'] = 'הפעל בדיקה במטלות חדשות';
+$string['privacy:metadata:aicc:data'] = 'Personal data passed through from subsystem.';
+$string['privacy:metadata:aicc:externalpurpose'] = 'This plugin sends data externally.';
+$string['privacy:metadata:plagiarism_originality_sub'] = 'Personal data from subs table';
+$string['privacy:metadata:plagiarism_originality_sub:userid'] = 'Personal userid data from subs table';

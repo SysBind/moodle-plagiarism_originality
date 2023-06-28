@@ -54,6 +54,7 @@ $string['check_ghostwriter_help'] =
 $string['check_ghostwriter_label'] = 'Ghostwriter detection';
 $string['ghostwriter_enabled'] = 'Enable ghostwriter detection';
 $string['ghostwriter_failed_message'] = 'Ghostwriter detection cannot be performed for online text.';
+$string['originality_unsupported_file'] = 'Unsupported file';
 $string['pdf:filename'] = 'PDF';
 $string['default_settings_assignments'] = 'Enable detection for new assignments';
 $string['privacy:metadata:aicc:data'] = 'Personal data passed through from subsystem.';
