@@ -68,7 +68,7 @@ class plagiarism_originality_external extends external_api {
     public static function create_report($docid, $content, $grade) {
         global $DB;
 
-        $params = self::validate_parameters(self::execute_parameters(), [
+        $params = self::validate_parameters(self::create_report_parameters(), [
                 'docid' => $docid,
                 'content' => $content,
                 'grade' => $grade,
