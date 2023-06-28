@@ -83,7 +83,7 @@ class plagiarism_originality_external extends external_api {
         $output->error = false;
 
         $submission = $DB->get_record('plagiarism_originality_sub', array(
-                'docid' => $params['docid']
+                'docid' => $params['docId']
         ));
 
         if (!$submission) {
