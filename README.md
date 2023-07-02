@@ -20,7 +20,7 @@ The Originality Plagiarism Plugin for Moodle is a powerful tool designed to dete
 
 To install the Plagiarism Originality Plugin for Moodle, follow these steps:
 
-1. Download the plugin package from the official website: [https://originality.world/](https://originality.world/) or from Moodle’s website.
+1. Download the plugin package from the official website: [https://moodle.org/plugins/plagiarism_originality/](https://moodle.org/plugins/plagiarism_originality/) or from Moodle’s website.
 
 2. Log in to your Moodle site as an administrator.
 
