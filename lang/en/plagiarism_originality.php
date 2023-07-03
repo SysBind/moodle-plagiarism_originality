@@ -55,6 +55,7 @@ $string['check_ghostwriter_label'] = 'Ghostwriter detection';
 $string['ghostwriter_enabled'] = 'Enable ghostwriter detection';
 $string['ghostwriter_failed_message'] = 'Ghostwriter detection cannot be performed for online text.';
 $string['originality_unsupported_file'] = 'Unsupported file';
+$string['default_settings_assignments'] = 'Enable detection for new assignments';
 $string['pdf:filename'] = 'PDF';
 $string['document_submitted'] = 'Originality API';
 $string['document_submitted_desc'] = 'Text or file content sent to originality';
