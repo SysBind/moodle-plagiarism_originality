@@ -40,7 +40,8 @@ class document_submitted extends \core\event\base {
      */
     protected function init() {
         $this->data['crud'] = 'r';
-        $this->data['edulevel'] = self::LEVEL_OTHER;
+        $this->data['edulevel'] = self::LEVEL_TEACHING;
+        $this->data['objecttable'] = 'plagiarism_originality_sub';
     }
 
     /**
@@ -62,12 +63,20 @@ class document_submitted extends \core\event\base {
     }
 
     /**
-     * Return the legacy event log data.
+     * Get URL related to the action
      *
-     * @return array
+     * @return \moodle_url
      */
-    protected function get_legacy_logdata() {
-        return array($this->courseid, 'course', get_string('document_submitted', 'plagiarism_originality'), $this->userid,
-                $this->courseid);
+    public function get_url() {
+        return null;
+    }
+
+    /**
+     * Get objectid mapping
+     *
+     * @return array of parameters for object mapping.
+     */
+    public static function get_objectid_mapping() {
+        return \core\event\base::NOT_MAPPED;
     }
 }
