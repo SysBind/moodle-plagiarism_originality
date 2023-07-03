@@ -744,7 +744,9 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
             }
         }
 
-        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cm->id));
+        if (isset($cm)) {
+            $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cm->id));
+        }
 
         $mform->addElement('header', 'originalitydesc', get_string('originality', 'plagiarism_originality'));
         $mform->addHelpButton('originalitydesc', 'originality', 'plagiarism_originality');
@@ -752,7 +754,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
                 array(0 => get_string('no'), 1 => get_string('yes')));
         $mform->setDefault('originality_use', 0);
 
-        if ($existing && $existing->ischeck) {
+        if (isset($existing) && $existing->ischeck) {
             $mform->setDefault('originality_use', 1);
         } else {
             $mform->setDefault('originality_use', 0);
@@ -760,7 +762,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
 
         // When new instance.
         if ($add) {
-            if ($config->default_use) {
+            if (isset($config->default_use)) {
                 $mform->setDefault('originality_use', $config->default_use);
             }
         }
@@ -808,12 +810,12 @@ function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
         $current = new stdClass();
         $current->cm = $data->coursemodule;
         $current->ischeck = $data->originality_use;
-        $current->ischeckgw = ($data->originality_use_ghostwriter ? $data->originality_use_ghostwriter : 0);
+        $current->ischeckgw = (isset($data->originality_use_ghostwriter) ? $data->originality_use_ghostwriter : 0);
 
         $DB->insert_record('plagiarism_originality_mod', $current);
     } else {
         $existing->ischeck = $data->originality_use;
-        $existing->ischeckgw = ($data->originality_use_ghostwriter ? $data->originality_use_ghostwriter : 0);
+        $existing->ischeckgw = (isset($data->originality_use_ghostwriter) ? $data->originality_use_ghostwriter : 0);
         $DB->update_record('plagiarism_originality_mod', $existing);
     }
 
