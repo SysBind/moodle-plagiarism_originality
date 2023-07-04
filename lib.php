@@ -69,6 +69,10 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
 
         // Check if plagiarism detection is enabled, user is a student, course module exists,
         // plagiarism checking is allowed, and user ID is provided.
+        if (has_capability('gradereport/grader:view', $PAGE->context)) {
+            return;
+        }
+
         if (!$this->utils->is_enabled() ||
                 $output->role->shortname == 'student' ||
                 !$output->cm ||
