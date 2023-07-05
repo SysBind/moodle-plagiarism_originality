@@ -60,16 +60,25 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
 
         $output = new stdClass();
         $output->cmid = $linkarray['cmid'];
+
+        // Set static variables.
+        static $cm;
+        static $allow;
+        if (empty($cm)) {
+            $cm = get_coursemodule_from_id('assign', $output->cmid);
+            $allow = $DB->get_record('plagiarism_originality_mod', ['cm' => $output->cmid]);
+        }
+
         $output->userid = $linkarray['userid'];
         $output->role = current(get_user_roles($PAGE->context, $USER->id));
         $output->file = (isset($linkarray['file']) && is_object($linkarray['file'])) ? $linkarray['file'] : false;
         $output->content = (isset($linkarray['content'])) ? $linkarray['content'] : false;
-        $output->cm = get_coursemodule_from_id('assign', $output->cmid);
-        $output->allow = $DB->get_record('plagiarism_originality_mod', ['cm' => $output->cmid]);
+        $output->cm = $cm;
+        $output->allow = $allow;
 
         // Check if plagiarism detection is enabled, user is a student, course module exists,
         // plagiarism checking is allowed, and user ID is provided.
-        if (has_capability('gradereport/grader:view', $PAGE->context)) {
+        if (!has_capability('gradereport/grader:view', $PAGE->context)) {
             return;
         }
 
