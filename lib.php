@@ -69,6 +69,11 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $allow = $DB->get_record('plagiarism_originality_mod', ['cm' => $output->cmid]);
         }
 
+        static $isenabled;
+        if (empty($isenabled)) {
+            $isenabled = $this->utils->is_enabled();
+        }
+
         $output->userid = $linkarray['userid'];
         $output->role = current(get_user_roles($PAGE->context, $USER->id));
         $output->file = (isset($linkarray['file']) && is_object($linkarray['file'])) ? $linkarray['file'] : false;
@@ -82,9 +87,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             return;
         }
 
-        if (!$this->utils->is_enabled() ||
-                !$output->cm ||
-                !$output->allow->ischeck) {
+        if (!$isenabled || !$output->cm || !$output->allow->ischeck) {
             return;
         }
 
