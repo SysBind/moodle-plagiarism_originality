@@ -75,7 +75,6 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         }
 
         $output->userid = $linkarray['userid'];
-        $output->role = current(get_user_roles($PAGE->context, $USER->id));
         $output->file = (isset($linkarray['file']) && is_object($linkarray['file'])) ? $linkarray['file'] : false;
         $output->content = (isset($linkarray['content'])) ? $linkarray['content'] : false;
         $output->cm = $cm;
