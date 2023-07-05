@@ -8,7 +8,7 @@ LMS). This plugin integrates seamlessly with Moodle and provides educators with 
 ## Commercial Subscription Requirement
 
 Please note that a commercial subscription is required to use the Originality Plagiarism Plugin for Moodle. To obtain a subscription and access the full functionality of the
-plugin, please visit our website originality.co.il for more information.
+plugin, please visit our website [originality.co.il](https://originality.co.il/) for more information.
 
 ## Features
 
