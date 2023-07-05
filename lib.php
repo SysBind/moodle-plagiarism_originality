@@ -74,7 +74,6 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         }
 
         if (!$this->utils->is_enabled() ||
-                $output->role->shortname == 'student' ||
                 !$output->cm ||
                 !$output->allow->ischeck) {
             return;
