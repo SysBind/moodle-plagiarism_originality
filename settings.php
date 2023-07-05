@@ -29,6 +29,7 @@ require_once($CFG->libdir . '/plagiarismlib.php');
 require_once($CFG->dirroot . '/plagiarism/originality/lib.php');
 require_once($CFG->dirroot . '/plagiarism/originality/plagiarism_form.php');
 require_once($CFG->dirroot . '/plagiarism/originality/version.php');
+require_once($CFG->dirroot . '/user/lib.php');
 
 require_login();
 admin_externalpage_setup('manageplagiarismplugins');
@@ -60,6 +61,30 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
 
     if ($service) {
 
+        if (!$user = $DB->get_record('user', array('idnumber' => 'originalityuser'))) {
+            $user = new stdClass();
+            $user->firstname = 'originality';
+            $user->lastname = 'user';
+            $user->idnumber = 'originalityuser';
+            $user->username = 'originalityuser';
+            $user->email = 'customerservice@originality.world';
+            $user->confirmed = true;
+            $user->mnethostid = $CFG->mnet_localhost_id;
+            $user->id = user_create_user($user, false, false);
+        }
+
+        $role = $DB->get_record('role', array('shortname' => 'originality'));
+        if (empty($role)) {
+            $roleid = create_role('Originality', 'originality', get_string('pluginname', 'plagiarism_originality'), 'originality');
+
+            set_role_contextlevels($roleid, array(CONTEXT_SYSTEM));
+            assign_capability('plagiarism/originality:manage', CAP_ALLOW, $roleid, $context->id, true);
+            accesslib_clear_role_cache($roleid);
+
+            // Role assign.
+            role_assign($roleid, $user->id, $context->id);
+        }
+
         // Check if a token has already been created for this user and this service.
         $conditions = [
                 'userid' => $USER->id,
@@ -70,7 +95,7 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
         // Check existing tokens.
         $tokens = $DB->get_record('external_tokens', $conditions);
         if (!$tokens && has_capability('moodle/webservice:createtoken', context_system::instance(), $USER->id)) {
-            $token = external_generate_token(EXTERNAL_TOKEN_PERMANENT, $service->id, $USER->id, \context_system::instance(), 0);
+            $token = external_generate_token(EXTERNAL_TOKEN_PERMANENT, $service->id, $user->id, \context_system::instance(), 0);
             set_config('wstoken', $token, 'plagiarism_originality');
         } else {
             set_config('wstoken', $tokens->token, 'plagiarism_originality');
