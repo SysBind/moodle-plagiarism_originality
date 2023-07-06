@@ -81,11 +81,7 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
         }
 
         set_role_contextlevels($roleid, array(CONTEXT_SYSTEM));
-
-        $requiredcapabilities = ['moodle/webservice:createtoken', 'plagiarism/originality:manage'];
-        foreach ($requiredcapabilities as $capability) {
-            assign_capability($capability, CAP_ALLOW, $roleid, $context->id, true);
-        }
+        assign_capability('plagiarism/originality:manage', CAP_ALLOW, $roleid, $context->id, true);
 
         accesslib_clear_role_cache($roleid);
 
@@ -101,7 +97,7 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
 
         // Check existing tokens.
         $tokens = $DB->get_record('external_tokens', $conditions);
-        if (!$tokens && has_capability('moodle/webservice:createtoken', context_system::instance(), $user->id)) {
+        if (!$tokens && has_capability('moodle/webservice:createtoken', context_system::instance())) {
             $token = external_generate_token(EXTERNAL_TOKEN_PERMANENT, $service->id, $user->id, \context_system::instance(), 0);
             set_config('wstoken', $token, 'plagiarism_originality');
         } else {

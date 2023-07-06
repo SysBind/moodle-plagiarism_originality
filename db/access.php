@@ -29,7 +29,6 @@ $capabilities = array(
         'plagiarism/originality:manage' => array(
                 'captype' => 'write',
                 'contextlevel' => CONTEXT_SYSTEM,
-                'archetypes' => array(),
-                'clonepermissionsfrom' => 'moodle/site:config'
+                'archetypes' => array()
         )
 );
