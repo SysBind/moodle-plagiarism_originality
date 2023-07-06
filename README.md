@@ -47,7 +47,8 @@ To install the Plagiarism Originality Plugin for Moodle, follow these steps:
 
 7. Follow the on-screen instructions to complete the installation process.
 
-8. Once the plugin is installed, configure the settings according to your institution's requirements.
+8. Once the plugin is installed, it creates an originality user, role, and token within your site to allow Originality to update Moodle when a report is available. Configure the
+   settings according to your institution's requirements.
 
 9. You're ready to start using the Plagiarism Originality Plugin for Moodle!
 
