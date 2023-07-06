@@ -61,3 +61,4 @@ $string['privacy:metadata:aicc:data'] = 'נתונים אישיים שהועבר�
 $string['privacy:metadata:aicc:externalpurpose'] = 'עותק פיזי של תוכן טקסט או קובץ שנשלח למקוריות';
 $string['privacy:metadata:plagiarism_originality_sub'] = 'נתונים אישיים מטבלת המשנה';
 $string['privacy:metadata:plagiarism_originality_sub:userid'] = 'נתוני משתמש אישי מטבלת המשנה';
+$string['originality:manage'] = 'ניהול אסימון שירות אינטרנט';

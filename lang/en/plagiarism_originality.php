@@ -63,3 +63,4 @@ $string['privacy:metadata:originality:data'] = 'Personal data passed through fro
 $string['privacy:metadata:originality:externalpurpose'] = 'Physical copy of text or file content sent to originality';
 $string['privacy:metadata:plagiarism_originality_sub'] = 'Personal data from subs table';
 $string['privacy:metadata:plagiarism_originality_sub:userid'] = 'Personal userid data from subs table';
+$string['originality:manage'] = 'Manage web service token';
