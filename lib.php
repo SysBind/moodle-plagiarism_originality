@@ -304,6 +304,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         if (isset($output->Id)) {
             $context = context_course::instance($data->courseid);
             $event = \plagiarism_originality\event\document_submitted::create(array(
+                    'objectid' => $data->cmid,
                     'context' => $context,
                     'userid' => $data->userid));
             $event->trigger();
