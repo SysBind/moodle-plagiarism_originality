@@ -25,6 +25,7 @@
 /**
  * Upgrade function for the plagiarism_originality plugin.
  * This function performs the necessary database upgrades based on the old version of the plugin.
+ *
  * @param int $oldversion The old version of the plugin.
  * @return bool Returns true if the upgrade is successful, false otherwise.
  */
@@ -32,84 +33,84 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
     global $DB, $CFG;
     $dbman = $DB->get_manager();
 
-    if ($oldversion < 2023051500) {
+    if ($oldversion < 2023070500) {
 
-        // Define table plagiarism_originality_mod to be created.
-        $table = new xmldb_table('plagiarism_originality_mod');
+        // Define table plagiarism_originality_cnf.
+        $table = new xmldb_table('plagiarism_originality_cnf');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'plagiarism_originality_mod_old');
+
+            // Define field name to be dropped from plagiarism_originality_cnf.
+            $field = new xmldb_field('name');
+
+            // Conditionally launch drop field name.
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->drop_field($table, $field);
+            }
+
+            // Launch rename field ischeck.
+            $field = new xmldb_field('value', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
+            $dbman->rename_field($table, $field, 'ischeck');
+
+            $field = new xmldb_field('ischeckgw', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, 0, 'ischeck');
+
+            // Conditionally launch add field ischeckgw.
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $dbman->rename_table($table, 'plagiarism_originality_mod');
         }
 
-        // Adding fields to table plagiarism_originality_mod.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('cm', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('ischeck', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
-        $table->add_field('ischeckgw', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
-
-        // Adding keys to table plagiarism_originality_mod.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-        $table->add_key('cm', XMLDB_KEY_FOREIGN, ['cm'], 'course_modules', ['id']);
-
-        // Conditionally launch create table for plagiarism_originality_mod.
-        if (!$dbman->table_exists($table)) {
-            $dbman->create_table($table);
-        }
-
-        // Define table plagiarism_originality_sub to be created.
+        // Define table originality_submissions.
         $table = new xmldb_table('originality_submissions');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'originality_submissions_old');
+
+            // Adding fields to table originality_submissions.
+            $field = new xmldb_field('cm', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+
+            // Conditionally launch add field cm.
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('docid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+
+            // Conditionally launch add field docid.
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            // Launch rename field actualuserid.
+            $field = new xmldb_field('actual_userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            $dbman->rename_field($table, $field, 'actualuserid');
+
+            // Launch rename field fileid.
+            $field = new xmldb_field('moodle_file_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            $dbman->rename_field($table, $field, 'fileid');
+
+            // Launch rename field filename.
+            $field = new xmldb_field('file_report', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            $dbman->rename_field($table, $field, 'filename');
+
+            $dbman->rename_table($table, 'plagiarism_originality_sub');
         }
 
-        // Adding fields to table originality_submissions.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('assignment', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('actualuserid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('docid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('ghostwriter', XMLDB_TYPE_INTEGER, '2', null, null, null, '0');
-        $table->add_field('file', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('filename', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('fileid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('status', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('grade', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('attempts', XMLDB_TYPE_INTEGER, '5', null, null, null, '0');
-        $table->add_field('created', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('updated', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('objectid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-        $table->add_field('parent', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-
-        // Adding keys to table originality_submissions.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-
-        // Conditionally launch create table for originality_submissions.
-        if (!$dbman->table_exists($table)) {
-            $dbman->create_table($table);
-        }
-
-        // Define table originality_groups to be created.
+        // Define table originality_groups.
         $table = new xmldb_table('originality_groups');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'originality_groups_old');
+            $dbman->rename_table($table, 'plagiarism_originality_grp');
         }
 
-        // Adding fields to table originality_groups.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('assignment', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
-        $table->add_field('token', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        // Define table plagiarism_originality_conf to be dropped.
+        $table = new xmldb_table('plagiarism_originality_conf');
 
-        // Adding keys to table originality_groups.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-
-        // Conditionally launch create table for originality_groups.
-        if (!$dbman->table_exists($table)) {
-            $dbman->create_table($table);
+        // Conditionally launch drop table for plagiarism_originality_conf.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
         }
 
         // Originality savepoint reached.
-        upgrade_plugin_savepoint(true, 2023051500, 'plagiarism', 'originality');
+        upgrade_plugin_savepoint(true, 2023070500, 'plagiarism', 'originality');
     }
 
     return true;
