@@ -22,7 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+if (defined('MOODLE_INTERNAL') && !during_initial_install()) {
+    if (get_config('plagiarism_originality', 'version') >= '10000000000') {
+        set_config('version', '2023031800', 'plagiarism_originality');
+    }
+}
 
 $plugin = new stdClass();
 $plugin->version = 2023070500;
