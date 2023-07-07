@@ -24,13 +24,15 @@
 
 $string['pluginname'] = 'Originalidad - Detección de Copias';
 $string['originality'] = 'Componente de Originalidad - Detección de Copias en Documentos';
-$string['originality_help'] = 'Configuración para la detección de copias en trabajos de texto. No debe utilizarse para trabajos en otros idiomas o trabajos de ingeniería, ya que el mecanismo no está diseñado para eso.';
+$string['originality_help'] =
+        'Configuración para la detección de copias en trabajos de texto. No debe utilizarse para trabajos en otros idiomas o trabajos de ingeniería, ya que el mecanismo no está diseñado para eso.';
 $string['originality_shortname'] = 'Originalidad';
 $string['plugin_server_type'] = 'Servidor de Originalidad';
 $string['plugin_settings'] = 'Configuración de Originalidad';
 $string['plugin_enabled'] = 'Habilitar el complemento';
 $string['plugin_connected'] = 'Clave secreta válida, conectado al sistema de Originalidad';
-$string['student_disclosure'] = "Debes marcar √ en el lugar correspondiente para enviar la tarea para su verificación de originalidad. Sin marcar esto, no se podrá enviar esta tarea.<br>Esta presentación es original, es de mi propiedad, fue realizada por mí y al presentarla asumo la responsabilidad de la originalidad del contenido.<br><br>Excepto en los lugares donde indiqué que el trabajo fue realizado por otros y se encuentra el enlace correspondiente en la bibliografía o en el lugar requerido.<br><br>Soy consciente y acepto que esta tarea será revisada para detectar plagio por parte de la empresa Originalidad y acepto los <a rel='external' href='https://www.originality.co.il/termsOfUse.html' target='_blank' style='text-decoration:underline'>Términos de uso</a>.";
+$string['student_disclosure'] =
+        "Debes marcar √ en el lugar correspondiente para enviar la tarea para su verificación de originalidad. Sin marcar esto, no se podrá enviar esta tarea.<br>Esta presentación es original, es de mi propiedad, fue realizada por mí y al presentarla asumo la responsabilidad de la originalidad del contenido.<br><br>Excepto en los lugares donde indiqué que el trabajo fue realizado por otros y se encuentra el enlace correspondiente en la bibliografía o en el lugar requerido.<br><br>Soy consciente y acepto que esta tarea será revisada para detectar plagio por parte de la empresa Originalidad y acepto los <a rel='external' href='https://www.originality.co.il/termsOfUse.html' target='_blank' style='text-decoration:underline'>Términos de uso</a>.";
 $string['secret'] = 'Clave de uso';
 $string['key'] = 'Clave de uso';
 $string['key_help'] = 'Debe tener una clave de uso para utilizar el complemento.';
@@ -40,13 +42,19 @@ $string['checking_unprocessable'] = 'No se puede procesar';
 $string['submitted_before_activation'] = 'Presentado antes de activar el complemento';
 $string['service_is_inactive'] = 'El complemento de Originalidad no está activo. Por favor, contacte al administrador de Moodle.';
 $string['warning_message'] = "Debe marcar el botón de aceptación ('Soy consciente y acepto') para habilitar el botón de envío.";
-$string['previous_submissions'] = 'Existen entregas anteriores. Estos estudiantes deben volver a entregar su trabajo para que se verifique su originalidad.';
-$string['production_endpoint'] = '<b>Servidor de Originalidad</b>&nbsp;&nbsp;<span style="font-size:14px;">Enviar trabajos al servidor de producción de Originalidad.</span>';
-$string['test_endpoint'] = '<b>Servidor de Prueba</b>&nbsp;&nbsp;<span style="font-size:14px;">Enviar trabajos al servidor de prueba de Originalidad. Debe seleccionar esto solo después de coordinar con Originalidad.</span>';
+$string['previous_submissions'] =
+        'Existen entregas anteriores. Estos estudiantes deben volver a entregar su trabajo para que se verifique su originalidad.';
+$string['production_endpoint'] =
+        '<b>Servidor de Originalidad</b>&nbsp;&nbsp;<span style="font-size:14px;">Enviar trabajos al servidor de producción de Originalidad.</span>';
+$string['test_endpoint'] =
+        '<b>Servidor de Prueba</b>&nbsp;&nbsp;<span style="font-size:14px;">Enviar trabajos al servidor de prueba de Originalidad. Debe seleccionar esto solo después de coordinar con Originalidad.</span>';
 $string['check_ghostwriter'] = 'Componente de Detección de Escritores Fantasma para Trabajos Grandes';
-$string['check_ghostwriter_help'] = 'Este componente solo se puede habilitar después de coordinar con Originalidad. Sin una coordinación previa, el componente no funcionará.';
+$string['check_ghostwriter_help'] =
+        'Este componente solo se puede habilitar después de coordinar con Originalidad. Sin una coordinación previa, el componente no funcionará.';
 $string['check_ghostwriter_label'] = 'Escritores Fantasma';
 $string['ghostwriter_enabled'] = 'Habilitar la verificación de Escritores Fantasma';
 $string['ghostwriter_failed_message'] = 'No se puede realizar la verificación de escritores fantasma para texto en línea';
-$string['pdf:filename'] = 'PDF';
+$string['pdf:filename'] = 'Ver informe de originalidad';
 $string['default_settings_assignments'] = 'Habilitar la verificación para nuevas tareas';
+$string['merge_reports'] = 'Combinar archivos de informes antiguos en una nueva estructura';
+$string['stuck_submissions'] = 'Intentando volver a enviar envíos que están bloqueados';

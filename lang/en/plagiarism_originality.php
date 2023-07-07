@@ -64,5 +64,5 @@ $string['privacy:metadata:originality:externalpurpose'] = 'Physical copy of text
 $string['privacy:metadata:plagiarism_originality_sub'] = 'Personal data from subs table';
 $string['privacy:metadata:plagiarism_originality_sub:userid'] = 'Personal userid data from subs table';
 $string['originality:manage'] = 'Manage web service token';
-$string['merge_reports'] = 'Merge the old reports';
-$string['stuck_submissions'] = 'Stuck submissions';
+$string['merge_reports'] = 'Merge old reports files into a new structure';
+$string['stuck_submissions'] = 'Attempting to resubmit submissions that are stuck';
