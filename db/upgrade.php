@@ -38,14 +38,79 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         $accesskey = get_config('plagiarism_originality', 'originality_key');
         set_config('secret', $accesskey, 'plagiarism_originality');
 
+        $table = new xmldb_table('plagiarism_originality_req');
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        $table = new xmldb_table('plagiarism_originality_resp');
+        if ($dbman->table_exists($table)) {
+
+            $field = new xmldb_field('assignment', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('ghostwriter', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('file_report', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('status', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('attempts', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('created', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('updated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('objectid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $field = new xmldb_field('parent', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+
+            $dbman->rename_table($table, 'originality_submissions');
+        }
+
+        $table = new xmldb_table('originality_groups');
+        if (!$dbman->table_exists($table)) {
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, 0);
+            $table->add_field('assignment', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            $table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
+            $table->add_field('token', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+            $dbman->create_table($table);
+        }
+
         // Define table plagiarism_originality_cnf.
         $table = new xmldb_table('plagiarism_originality_cnf');
         if ($dbman->table_exists($table)) {
 
-            // Define field name to be dropped from plagiarism_originality_cnf.
-            $field = new xmldb_field('name');
-
             // Conditionally launch drop field name.
+            $field = new xmldb_field('name');
             if ($dbman->field_exists($table, $field)) {
                 $dbman->drop_field($table, $field);
             }
@@ -54,9 +119,8 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             $field = new xmldb_field('value', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
             $dbman->rename_field($table, $field, 'ischeck');
 
-            $field = new xmldb_field('ischeckgw', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, 0, 'ischeck');
-
             // Conditionally launch add field ischeckgw.
+            $field = new xmldb_field('ischeckgw', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, 0, 'ischeck');
             if (!$dbman->field_exists($table, $field)) {
                 $dbman->add_field($table, $field);
             }
@@ -68,17 +132,14 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         $table = new xmldb_table('originality_submissions');
         if ($dbman->table_exists($table)) {
 
-            // Adding fields to table originality_submissions.
-            $field = new xmldb_field('cm', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-
             // Conditionally launch add field cm.
+            $field = new xmldb_field('cm', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
             if (!$dbman->field_exists($table, $field)) {
                 $dbman->add_field($table, $field);
             }
 
-            $field = new xmldb_field('docid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
-
             // Conditionally launch add field docid.
+            $field = new xmldb_field('docid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
             if (!$dbman->field_exists($table, $field)) {
                 $dbman->add_field($table, $field);
             }
