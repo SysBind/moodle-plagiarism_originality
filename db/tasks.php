@@ -34,5 +34,14 @@ $tasks = array(
                 'day' => '*',
                 'month' => '*',
                 'dayofweek' => '*'
+        ),
+        array(
+                'classname' => 'plagiarism_originality\task\merge_reports',
+                'blocking' => 0,
+                'minute' => '*/10',
+                'hour' => '*',
+                'day' => '*',
+                'month' => '*',
+                'dayofweek' => '*'
         )
 );

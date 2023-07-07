@@ -46,7 +46,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return get_string('pluginname', 'plagiarism_originality');
+        return get_string('stuck_submissions', 'plagiarism_originality');
     }
 
     /**
@@ -60,7 +60,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
 
         $tmp = [];
         if (!$submissions) {
-            mtrace('Error Task: there is no any submissions to resubmit.');
+            mtrace('Task: There are no submissions to resubmit.');
         }
 
         foreach ($submissions as $submission) {
@@ -77,7 +77,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
 
             $course = $lib->utils->get_course($submission->assignment);
             if (!$course) {
-                mtrace('Error Task: there is no any course for this submission ID: ' . $submission->id);
+                mtrace('Task: There is no course associated with this submission #' . $submission->id);
                 return true;
             }
 
@@ -122,9 +122,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
             }
 
             $lib->utils->update_submission($submission);
-            mtrace('Resubmit >>> submission id: ' . $submission->id . ', assignment: ' . $submission->assignment .
-                    ', ghostwriter: ' . $submission->ghostwriter . ', user:' . $submission->userid . ', status: ' .
-                    $submission->status);
+            mtrace('Task: Submission #' . $submission->id . ' was submitted successfully.');
         }
 
         return true;

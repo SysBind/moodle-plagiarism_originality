@@ -62,3 +62,5 @@ $string['privacy:metadata:aicc:externalpurpose'] = 'עותק פיזי של תו�
 $string['privacy:metadata:plagiarism_originality_sub'] = 'נתונים אישיים מטבלת המשנה';
 $string['privacy:metadata:plagiarism_originality_sub:userid'] = 'נתוני משתמש אישי מטבלת המשנה';
 $string['originality:manage'] = 'ניהול אסימון שירות אינטרנט';
+$string['merge_reports'] = 'הסבה של דוחות מקוריות';
+$string['stuck_submissions'] = 'שליחת עבודות תקועות';

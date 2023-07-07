@@ -31,7 +31,7 @@ if (!during_initial_install()) {
 }
 
 $plugin = new stdClass();
-$plugin->version = 2023070500;
+$plugin->version = 2023080500;
 $plugin->requires = 2016061505;
 $plugin->component = 'plagiarism_originality';
 $plugin->release = '7.0';
