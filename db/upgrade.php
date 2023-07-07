@@ -35,6 +35,9 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
 
     if ($oldversion < 2023070500) {
 
+        $accesskey = get_config('plagiarism_originality', 'originality_key');
+        set_config('secret', $accesskey, 'plagiarism_originality');
+
         // Define table plagiarism_originality_cnf.
         $table = new xmldb_table('plagiarism_originality_cnf');
         if ($dbman->table_exists($table)) {
