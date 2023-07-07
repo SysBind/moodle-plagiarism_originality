@@ -156,6 +156,12 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             $field = new xmldb_field('file_report', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             $dbman->rename_field($table, $field, 'filename');
 
+            // Conditionally launch drop field file_identifier.
+            $field = new xmldb_field('file_identifier');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->drop_field($table, $field);
+            }
+
             $dbman->rename_table($table, 'plagiarism_originality_sub');
         }
 
