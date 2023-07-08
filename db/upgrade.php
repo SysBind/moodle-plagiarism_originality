@@ -156,12 +156,6 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             $field = new xmldb_field('file_report', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             $dbman->rename_field($table, $field, 'filename');
 
-            // Conditionally launch drop field file_identifier.
-            $field = new xmldb_field('file_identifier');
-            if ($dbman->field_exists($table, $field)) {
-                $dbman->drop_field($table, $field);
-            }
-
             $dbman->rename_table($table, 'plagiarism_originality_sub');
         }
 
@@ -181,6 +175,29 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
 
         // Originality savepoint reached.
         upgrade_plugin_savepoint(true, 2023070500, 'plagiarism', 'originality');
+    }
+
+    if ($oldversion < 2023090500) {
+
+        // Define table plagiarism_originality_sub.
+        $table = new xmldb_table('plagiarism_originality_sub');
+        if ($dbman->table_exists($table)) {
+
+            // Conditionally launch drop field parent.
+            $field = new xmldb_field('parent');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->drop_field($table, $field);
+            }
+
+            // Conditionally launch drop field file_identifier.
+            $field = new xmldb_field('file_identifier');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->drop_field($table, $field);
+            }
+        }
+
+        // Originality savepoint reached.
+        upgrade_plugin_savepoint(true, 2023090500, 'plagiarism', 'originality');
     }
 
     return true;

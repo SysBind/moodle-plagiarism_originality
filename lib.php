@@ -686,15 +686,9 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $submission->attempts = 1;
         $submission->updated = time();
         $submission->objectid = $objectid;
-        $submission->parent = 0;
+        $submission->ghostwriter = $ghostwriter;
 
         $this->utils->set_submission($submission);
-
-        if ($ghostwriter) {
-            $submission->ghostwriter = $ghostwriter;
-            $submission->parent = 1;
-            $this->utils->set_submission($submission);
-        }
     }
 
     /**
@@ -789,7 +783,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
                     get_string('service_is_inactive', 'plagiarism_originality') . '</div>');
         }
 
-        if ($config->originality_ghostwriter) {
+        if ($config->check_ghostwriter) {
 
             $htmlnotify = '<div style="display: none;" class="core-notification originality-gw-notify">';
             $htmlnotify .= '<msg>' . get_string('ghostwriter_failed_message', 'plagiarism_originality') . '</msg>';

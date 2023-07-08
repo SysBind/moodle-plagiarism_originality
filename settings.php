@@ -48,8 +48,8 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
         $data->enabled = 0;
     }
 
-    if (!isset($data->originality_ghostwriter)) {
-        $data->originality_ghostwriter = 0;
+    if (!isset($data->check_ghostwriter)) {
+        $data->check_ghostwriter = 0;
     }
 
     foreach ($data as $key => $value) {
