@@ -205,6 +205,12 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             }
         }
 
+        // Define table plagiarism_originality_resp.
+        $table = new xmldb_table('plagiarism_originality_resp');
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
         // Originality savepoint reached.
         upgrade_plugin_savepoint(true, 2023070900, 'plagiarism', 'originality');
     }
