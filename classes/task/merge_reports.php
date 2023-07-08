@@ -64,7 +64,7 @@ class merge_reports extends \core\task\scheduled_task {
 
         foreach ($submissions as $submission) {
 
-            if (strpos($submission->filename, '_') !== false) {
+            if (strpos($submission->filename, 'FilePDF') !== false) {
                 // Version 6.2.0.
                 $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
             } else {
@@ -80,6 +80,10 @@ class merge_reports extends \core\task\scheduled_task {
 
                 $submission->docid = -1;
                 $submission->status = 2;
+                $submission->attempts = 1;
+                $submission->created = time();
+                $submission->updated = time();
+
                 $lib->utils->update_submission($submission);
 
                 mtrace('Task: Generation of report #' . $submission->id . ' was completed successfully.');
