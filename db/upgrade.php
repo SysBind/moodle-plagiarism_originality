@@ -91,7 +91,10 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
                 $dbman->add_field($table, $field);
             }
 
-            $dbman->rename_table($table, 'originality_submissions');
+            $table = new xmldb_table('originality_submissions');
+            if (!$dbman->table_exists($table)) {
+                $dbman->rename_table($table, 'originality_submissions');
+            }
         }
 
         $table = new xmldb_table('originality_groups');
