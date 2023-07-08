@@ -177,7 +177,7 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         upgrade_plugin_savepoint(true, 2023070500, 'plagiarism', 'originality');
     }
 
-    if ($oldversion < 2023090500) {
+    if ($oldversion < 2023070900) {
 
         // Define table plagiarism_originality_sub.
         $table = new xmldb_table('plagiarism_originality_sub');
@@ -194,10 +194,16 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             if ($dbman->field_exists($table, $field)) {
                 $dbman->drop_field($table, $field);
             }
+
+            // Conditionally launch drop field actualuserid.
+            $field = new xmldb_field('actualuserid');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->drop_field($table, $field);
+            }
         }
 
         // Originality savepoint reached.
-        upgrade_plugin_savepoint(true, 2023090500, 'plagiarism', 'originality');
+        upgrade_plugin_savepoint(true, 2023070900, 'plagiarism', 'originality');
     }
 
     return true;
