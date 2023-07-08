@@ -73,6 +73,7 @@ class merge_reports extends \core\task\scheduled_task {
                 $lib->utils->save_file($newfile);
 
                 $submission->docid = -1;
+                $submission->status = 2;
                 $lib->utils->update_submission($submission);
 
                 mtrace('Task: Generation of report #' . $submission->id . ' was completed successfully.');
