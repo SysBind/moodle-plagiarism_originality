@@ -56,7 +56,7 @@ class merge_reports extends \core\task\scheduled_task {
         global $DB, $CFG;
 
         $lib = new \plagiarism_plugin_originality();
-        $submissions = $DB->get_records('plagiarism_originality_sub', array('docid' => 0), 'updated DESC', '*', 0, 10);
+        $submissions = $DB->get_records('plagiarism_originality_sub', array('docid' => 0), 'updated DESC', '*', 0, 100);
 
         if (!$submissions) {
             mtrace('Task: There are no submissions to merge.');
