@@ -64,7 +64,13 @@ class merge_reports extends \core\task\scheduled_task {
 
         foreach ($submissions as $submission) {
 
-            $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
+            if (strpos($submission->filename, '_') !== false) {
+                // Version 6.2.0.
+                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
+            } else {
+                // Version 5.3.9.
+                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->file;
+            }
 
             if (file_exists($file)) {
                 $newfile = new \stdClass();
