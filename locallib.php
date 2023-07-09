@@ -138,6 +138,8 @@ class plagiarism_plugin_originality_utils {
      */
     public function webserver_token() {
 
+        global $CFG;
+
         if (!isset($this->config->secret)) {
             return false;
         }
@@ -145,6 +147,7 @@ class plagiarism_plugin_originality_utils {
         $data = array(
                 'apiKey' => $this->config->secret,
                 'MoodleToken' => $this->config->wstoken,
+                'MoodleURL' => $CFG->wwwroot,
                 'IsUpdate' => 1
         );
 
