@@ -91,8 +91,8 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
                 $dbman->add_field($table, $field);
             }
 
-            $table = new xmldb_table('originality_submissions');
-            if (!$dbman->table_exists($table)) {
+            $newtable = new xmldb_table('originality_submissions');
+            if (!$dbman->table_exists($newtable)) {
                 $dbman->rename_table($table, 'originality_submissions');
             }
         }
@@ -128,7 +128,10 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
                 $dbman->add_field($table, $field);
             }
 
-            $dbman->rename_table($table, 'plagiarism_originality_mod');
+            $newtable = new xmldb_table('plagiarism_originality_mod');
+            if (!$dbman->table_exists($newtable)) {
+                $dbman->rename_table($table, 'plagiarism_originality_mod');
+            }
         }
 
         // Define table originality_submissions.
@@ -166,8 +169,8 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             }
 
             // Define table plagiarism_originality_sub.
-            $oldtable = new xmldb_table('plagiarism_originality_sub');
-            if (!$dbman->table_exists($oldtable)) {
+            $newtable = new xmldb_table('plagiarism_originality_sub');
+            if (!$dbman->table_exists($newtable)) {
                 $dbman->rename_table($table, 'plagiarism_originality_sub');
             }
         }
@@ -177,8 +180,8 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         if ($dbman->table_exists($table)) {
 
             // Define table plagiarism_originality_grp.
-            $table = new xmldb_table('plagiarism_originality_grp');
-            if (!$dbman->table_exists($table)) {
+            $newtable = new xmldb_table('plagiarism_originality_grp');
+            if (!$dbman->table_exists($newtable)) {
                 $dbman->rename_table($table, 'plagiarism_originality_grp');
             }
         }
