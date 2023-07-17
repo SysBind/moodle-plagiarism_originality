@@ -166,8 +166,8 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             }
 
             // Define table plagiarism_originality_sub.
-            $table = new xmldb_table('plagiarism_originality_sub');
-            if (!$dbman->table_exists($table)) {
+            $oldtable = new xmldb_table('plagiarism_originality_sub');
+            if (!$dbman->table_exists($oldtable)) {
                 $dbman->rename_table($table, 'plagiarism_originality_sub');
             }
         }
