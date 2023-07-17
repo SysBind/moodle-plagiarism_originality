@@ -149,23 +149,38 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
 
             // Launch rename field actualuserid.
             $field = new xmldb_field('actual_userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
-            $dbman->rename_field($table, $field, 'actualuserid');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->rename_field($table, $field, 'actualuserid');
+            }
 
             // Launch rename field fileid.
             $field = new xmldb_field('moodle_file_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0);
-            $dbman->rename_field($table, $field, 'fileid');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->rename_field($table, $field, 'fileid');
+            }
 
             // Launch rename field filename.
             $field = new xmldb_field('file_report', XMLDB_TYPE_TEXT, 'medium', null, null, null);
-            $dbman->rename_field($table, $field, 'filename');
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->rename_field($table, $field, 'filename');
+            }
 
-            $dbman->rename_table($table, 'plagiarism_originality_sub');
+            // Define table plagiarism_originality_sub.
+            $table = new xmldb_table('plagiarism_originality_sub');
+            if (!$dbman->table_exists($table)) {
+                $dbman->rename_table($table, 'plagiarism_originality_sub');
+            }
         }
 
         // Define table originality_groups.
         $table = new xmldb_table('originality_groups');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'plagiarism_originality_grp');
+
+            // Define table plagiarism_originality_grp.
+            $table = new xmldb_table('plagiarism_originality_grp');
+            if (!$dbman->table_exists($table)) {
+                $dbman->rename_table($table, 'plagiarism_originality_grp');
+            }
         }
 
         // Define table plagiarism_originality_conf to be dropped.
