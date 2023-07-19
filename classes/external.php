@@ -89,7 +89,7 @@ class plagiarism_originality_external extends external_api {
         if (!$submission) {
             $output->error = true;
         } else {
-            unset($submission->file);
+            unset($submission->filesubmited);
             $submission->status = 2;
             $submission->updated = time();
             $submission->grade = $params['grade'];

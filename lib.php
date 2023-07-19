@@ -668,7 +668,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $submission = new stdClass();
         $submission->assignment = $assignnum;
         $submission->userid = $userid;
-        $submission->file = $filename;
+        $submission->filesubmited = $filename;
         $submission->fileid = $moodlefileid;
         $submission->status = 0;
         $submission->cm = $cm;

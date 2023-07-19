@@ -233,13 +233,13 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         upgrade_plugin_savepoint(true, 2023070900, 'plagiarism', 'originality');
     }
 
-    if ($oldversion < 2023071900) {
+    if ($oldversion < 2023072000) {
 
         $table = new xmldb_table('plagiarism_originality_sub');
         if ($dbman->table_exists($table)) {
 
             // Conditionally launch add file field.
-            $field = new xmldb_field('file', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            $field = new xmldb_field('filesubmited', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             if (!$dbman->field_exists($table, $field)) {
                 $dbman->add_field($table, $field);
             }

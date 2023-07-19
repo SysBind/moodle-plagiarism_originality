@@ -51,7 +51,7 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
                 'originality_sub',
                 array('id'),
                 array(
-                        'assignment', 'cm', 'userid', 'docid', 'ghostwriter', 'file', 'filename', 'fileid',
+                        'assignment', 'cm', 'userid', 'docid', 'ghostwriter', 'filesubmited', 'filename', 'fileid',
                         'status', 'grade', 'attempts', 'created', 'updated', 'objectid', 'parent'
                 )
         );

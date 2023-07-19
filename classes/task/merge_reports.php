@@ -69,7 +69,7 @@ class merge_reports extends \core\task\scheduled_task {
                 $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
             } else {
                 // Version 5.3.9.
-                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->file;
+                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filesubmited;
             }
 
             if (file_exists($file)) {

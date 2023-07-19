@@ -24,7 +24,7 @@
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="docid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="ghostwriter" TYPE="int" LENGTH="2" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
-                <FIELD NAME="file" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="filesubmited" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="filename" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="fileid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
                 <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
