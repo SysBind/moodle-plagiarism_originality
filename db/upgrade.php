@@ -239,11 +239,12 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         if ($dbman->table_exists($table)) {
 
             // Launch rename field file.
-            $field = new xmldb_field('file', XMLDB_TYPE_TEXT, 'medium', null, null, null);
-            if ($dbman->field_exists($table, $field)) {
+            $fieldfile = new xmldb_field('file', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            $fieldfilesubmited = new xmldb_field('filesubmited', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            if ($dbman->field_exists($table, $fieldfile) && !$dbman->field_exists($table, $fieldfilesubmited)) {
                 $dbman->rename_field($table, $field, 'filesubmited');
             }
-            
+
             // Conditionally launch add file field.
             $field = new xmldb_field('filesubmited', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             if (!$dbman->field_exists($table, $field)) {
