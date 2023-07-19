@@ -817,12 +817,12 @@ function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
 
         $current = new stdClass();
         $current->cm = $data->coursemodule;
-        $current->ischeck = $data->originality_use;
+        $current->ischeck = (isset($data->originality_use) ? $data->originality_use : 0);
         $current->ischeckgw = (isset($data->originality_use_ghostwriter) ? $data->originality_use_ghostwriter : 0);
 
         $DB->insert_record('plagiarism_originality_mod', $current);
     } else {
-        $existing->ischeck = $data->originality_use;
+        $existing->ischeck = (isset($data->originality_use) ? $data->originality_use : 0);
         $existing->ischeckgw = (isset($data->originality_use_ghostwriter) ? $data->originality_use_ghostwriter : 0);
         $DB->update_record('plagiarism_originality_mod', $existing);
     }
