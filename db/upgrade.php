@@ -238,6 +238,12 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         $table = new xmldb_table('plagiarism_originality_sub');
         if ($dbman->table_exists($table)) {
 
+            // Launch rename field file.
+            $field = new xmldb_field('file', XMLDB_TYPE_TEXT, 'medium', null, null, null);
+            if ($dbman->field_exists($table, $field)) {
+                $dbman->rename_field($table, $field, 'filesubmited');
+            }
+            
             // Conditionally launch add file field.
             $field = new xmldb_field('filesubmited', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             if (!$dbman->field_exists($table, $field)) {
@@ -246,7 +252,7 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
         }
 
         // Originality savepoint reached.
-        upgrade_plugin_savepoint(true, 2023071900, 'plagiarism', 'originality');
+        upgrade_plugin_savepoint(true, 2023072000, 'plagiarism', 'originality');
     }
 
     return true;
