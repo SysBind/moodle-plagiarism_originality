@@ -31,9 +31,9 @@ if (!during_initial_install()) {
 }
 
 $plugin = new stdClass();
-$plugin->version = 20230709000;
+$plugin->version = 20230709000; // Resolved an issue with handling version numbers of older releases.
 $var = 'version';
-$plugin->$var = 2023070900;
+$plugin->$var = 2023071900;
 $plugin->requires = 2016061505;
 $plugin->component = 'plagiarism_originality';
 $plugin->release = '7.0';
