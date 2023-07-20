@@ -242,7 +242,7 @@ function xmldb_plagiarism_originality_upgrade($oldversion = 0) {
             $fieldfile = new xmldb_field('file', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             $fieldfilesubmited = new xmldb_field('filesubmited', XMLDB_TYPE_TEXT, 'medium', null, null, null);
             if ($dbman->field_exists($table, $fieldfile) && !$dbman->field_exists($table, $fieldfilesubmited)) {
-                $dbman->rename_field($table, $field, 'filesubmited');
+                $dbman->rename_field($table, $fieldfile, 'filesubmited');
             }
 
             // Conditionally launch add file field.
