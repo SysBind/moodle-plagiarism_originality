@@ -65,10 +65,11 @@ class plagiarism_plugin_originality_utils {
     }
 
     /**
-     * Get the URL of a file based on its item ID.
+     * Retrieves the URL of a file associated with a specific context and item in the plagiarism_originality component.
      *
-     * @param int $itemid The item ID of the file.
-     * @return string|null The URL of the file if it exists, or null if the file doesn't exist.
+     * @param object $data The data object containing the course module information.
+     *                     Must have the properties 'cm', 'id' representing context module and item id respectively.
+     * @return string|null The URL of the file if found, otherwise null.
      */
     public function get_file($data) {
 
