@@ -147,7 +147,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 }
 
                 if ($submission->status == 2) {
-                    $output->pdf = html_writer::link($this->utils->get_file($submission->id),
+                    $output->pdf = html_writer::link($this->utils->get_file($submission),
                             $OUTPUT->pix_icon('f/pdf', get_string('pdf:filename', 'plagiarism_originality')));
 
                     if ($submission->grade < 0) {
@@ -155,7 +155,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                     } else if ($submission->grade > 950) {
                         $output->html .= get_string('checking_unprocessable', 'plagiarism_originality') . ' ' . $submission->grade;
                     } else {
-                        $output->html .= html_writer::link($this->utils->get_file($submission->id),
+                        $output->html .= html_writer::link($this->utils->get_file($submission),
                                 round($submission->grade) . '%');
                     }
 
@@ -845,7 +845,7 @@ function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
 function plagiarism_originality_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
 
     // Check the contextlevel is as expected - if your plugin is a block, this becomes CONTEXT_BLOCK, etc.
-    if ($context->contextlevel != CONTEXT_SYSTEM) {
+    if ($context->contextlevel != CONTEXT_MODULE) {
         return false;
     }
 
@@ -859,7 +859,7 @@ function plagiarism_originality_pluginfile($course, $cm, $context, $filearea, $a
         require_login($course, true, $cm);
 
         // Check the relevant capabilities - these may vary depending on the filearea being accessed.
-        if (!has_capability('mod/assign:viewgrades', $context)) {
+        if (!has_capability('gradereport/grader:view', $context)) {
             return false;
         }
 

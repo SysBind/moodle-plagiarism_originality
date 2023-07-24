@@ -41,8 +41,9 @@ class plagiarism_plugin_originality_utils {
      * @return void
      */
     public function save_file($data) {
+
         $fs = get_file_storage();
-        $context = \context_system::instance();
+        $context = \context_module::instance($data->cm);
 
         $fileinfo = array(
                 'contextid' => $context->id,
@@ -69,16 +70,16 @@ class plagiarism_plugin_originality_utils {
      * @param int $itemid The item ID of the file.
      * @return string|null The URL of the file if it exists, or null if the file doesn't exist.
      */
-    public function get_file($itemid) {
-        $fs = get_file_storage();
-        $context = \context_system::instance();
+    public function get_file($data) {
 
+        $fs = get_file_storage();
+        $context = \context_module::instance($data->cm);
         // Prepare file record object.
         $fileinfo = array(
                 'contextid' => $context->id,
                 'component' => 'plagiarism_originality',
                 'filearea' => 'reports',
-                'itemid' => $itemid,
+                'itemid' => $data->id,
                 'filepath' => '/',
                 'filename' => 'report.pdf');
 

@@ -76,6 +76,7 @@ class merge_reports extends \core\task\scheduled_task {
                 $newfile = new \stdClass();
                 $newfile->content = file_get_contents($file);
                 $newfile->itemid = $submission->id;
+                $newfile->cm = $submission->cm;
                 $lib->utils->save_file($newfile);
 
                 $submission->docid = -1;

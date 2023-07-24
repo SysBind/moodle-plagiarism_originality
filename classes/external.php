@@ -44,6 +44,7 @@ class plagiarism_originality_external extends external_api {
      * Returns the expected parameters for the create_report function.
      * This function defines the expected parameters for the create_report function. It specifies the data types and descriptions
      * of each parameter.
+     *
      * @return external_function_parameters The parameters expected by the create_report function.
      */
     public static function create_report_parameters() {
@@ -99,6 +100,8 @@ class plagiarism_originality_external extends external_api {
             $file = new stdClass();
             $file->content = base64_decode($params['content']);
             $file->itemid = $submission->id;
+            $file->cm = $submission->cm;
+
             $output->utils->save_file($file);
         }
 
