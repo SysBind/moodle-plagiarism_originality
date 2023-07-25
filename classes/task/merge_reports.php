@@ -64,6 +64,16 @@ class merge_reports extends \core\task\scheduled_task {
 
         foreach ($submissions as $submission) {
 
+            if ($submission->assignment) {
+                $assign = $DB->get_record('assign', array('id' => $submission->assignment));
+
+                if ($assign) {
+                    $cm = $DB->get_record('course_modules',
+                            array('instance' => $submission->assignment, 'course' => $assign->course));
+                    $submission->cm = $cm->id;
+                }
+            }
+
             if (strpos($submission->filename, 'FilePDF') !== false) {
                 // Version 6.2.0.
                 $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
