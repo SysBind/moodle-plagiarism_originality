@@ -86,8 +86,7 @@ class plagiarism_plugin_originality_utils {
                 $data->cm = $cm->id;
             }
 
-            // Update old file with current cmid.
-            //
+            // Update the old file with the current cmid.
             $DB->update_record('plagiarism_originality_sub', $data);
         }
 
