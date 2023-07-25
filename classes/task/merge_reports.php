@@ -64,41 +64,52 @@ class merge_reports extends \core\task\scheduled_task {
 
         foreach ($submissions as $submission) {
 
-            if ($submission->assignment) {
+            if (!$submission->cm && $submission->assignment) {
                 $assign = $DB->get_record('assign', array('id' => $submission->assignment));
 
                 if ($assign) {
                     $cm = $DB->get_record('course_modules',
                             array('instance' => $submission->assignment, 'course' => $assign->course));
                     $submission->cm = $cm->id;
+
+                    mtrace('Task: Locate missing CMID instance #' . $submission->cm);
                 }
             }
 
-            if (strpos($submission->filename, 'FilePDF') !== false) {
-                // Version 6.2.0.
-                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
+            if (!$submission->cm) {
+                mtrace('Task: Skipping CMID missing instance #' . $submission->id);
             } else {
-                // Version 5.3.9.
-                $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filesubmited;
+                if (strpos($submission->filename, 'FilePDF') !== false) {
+                    // Version 6.2.0.
+                    $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filename;
+                } else {
+                    // Version 5.3.9.
+                    $file = $CFG->dataroot . '/originality/' . $submission->assignment . '/' . $submission->filesubmited;
+                }
+
+                if (file_exists($file)) {
+                    $newfile = new \stdClass();
+                    $newfile->content = file_get_contents($file);
+                    $newfile->itemid = $submission->id;
+                    $newfile->cm = $submission->cm;
+
+                    mtrace('Task: Submission #' . $submission->id . ' is in the process of being merged.');
+
+                    $lib->utils->save_file($newfile);
+
+                    mtrace('Task: Generation of report for submission #' . $submission->id . ' was completed successfully.');
+                } else {
+                    mtrace('Task: File not found for submission #' . $submission->id);
+                }
             }
 
-            if (file_exists($file)) {
-                $newfile = new \stdClass();
-                $newfile->content = file_get_contents($file);
-                $newfile->itemid = $submission->id;
-                $newfile->cm = $submission->cm;
-                $lib->utils->save_file($newfile);
+            $submission->docid = -1;
+            $submission->status = 2;
+            $submission->attempts = 1;
+            $submission->created = time();
+            $submission->updated = time();
 
-                $submission->docid = -1;
-                $submission->status = 2;
-                $submission->attempts = 1;
-                $submission->created = time();
-                $submission->updated = time();
-
-                $lib->utils->update_submission($submission);
-
-                mtrace('Task: Generation of report #' . $submission->id . ' was completed successfully.');
-            }
+            $lib->utils->update_submission($submission);
         }
 
         return true;
