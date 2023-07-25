@@ -73,7 +73,28 @@ class plagiarism_plugin_originality_utils {
      */
     public function get_file($data) {
 
+        global $DB;
+
         $fs = get_file_storage();
+
+        if (!$data->cm && $data->assignment) {
+            $assign = $DB->get_record('assign', array('id' => $data->assignment));
+
+            if ($assign) {
+                $cm = $DB->get_record('course_modules',
+                        array('instance' => $data->assignment, 'course' => $assign->course));
+                $data->cm = $cm->id;
+            }
+
+            // Update old file with current cmid.
+            //
+            $DB->update_record('plagiarism_originality_sub', $data);
+        }
+
+        if (!$data->cm) {
+            return false;
+        }
+
         $context = \context_module::instance($data->cm);
         // Prepare file record object.
         $fileinfo = array(
