@@ -52,7 +52,8 @@ To install the Plagiarism Originality Plugin for Moodle, follow these steps:
 
 9. You're ready to start using the Plagiarism Originality Plugin for Moodle!
 
-[Click here](https://originality.world/Originality%20Plagiarism%20Plugin%20Installation%20Tutorial%202023-07.pdf]) to download a tutorial on how to configure the Originality plugin in Moodle.
+[Click here](https://originality.world/Originality%20Plagiarism%20Plugin%20Installation%20Tutorial%202023-07.pdf) to download a tutorial on how to configure the Originality plugin
+in Moodle.
 
 ## Usage
 
