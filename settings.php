@@ -82,6 +82,7 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
 
         set_role_contextlevels($roleid, array(CONTEXT_SYSTEM));
         assign_capability('plagiarism/originality:manage', CAP_ALLOW, $roleid, $context->id, true);
+        assign_capability('webservice/rest:use', CAP_ALLOW, $roleid, $context->id, true);
 
         accesslib_clear_role_cache($roleid);
 
