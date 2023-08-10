@@ -1,5 +1,7 @@
 # Originality - Plagiarism Plugin for Moodle
 
+[![Maintained by Mattan Dor (CentricApp)](https://img.shields.io/badge/Maintained%20by-Mattan%20Dor%20(CentricApp)-brightgreen)](https://centricapp.co)
+
 ![Originality Plugin Logo](https://originality.co.il/images/logo.png)
 
 The Originality Plagiarism Plugin for Moodle is a powerful tool designed to detect and deter plagiarism in educational institutions using the Moodle learning management system (
