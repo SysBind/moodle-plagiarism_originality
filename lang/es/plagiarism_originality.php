@@ -49,10 +49,9 @@ $string['production_endpoint'] =
 $string['test_endpoint'] =
         '<b>Servidor de Prueba</b>&nbsp;&nbsp;<span style="font-size:14px;">Enviar trabajos al servidor de prueba de Originalidad. Debe seleccionar esto solo después de coordinar con Originalidad.</span>';
 $string['check_ghostwriter'] = 'Componente de Detección de Escritores Fantasma para Trabajos Grandes';
-$string['check_ghostwriter_help'] =
-        'Este componente solo se puede habilitar después de coordinar con Originalidad. Sin una coordinación previa, el componente no funcionará.';
+$string['check_ghostwriter_help'] = 'Ghostwriter check realiza un servicio adicional que calcula la probabilidad de que el estudiante haya escrito la tarea enviada. Debe verificar con Originality su elegibilidad para utilizar el servicio. Simplemente habilitarlo sin la aprobación previa de Originality no habilitará el servicio, pero seguramente frustrará a sus profesores.';
 $string['check_ghostwriter_label'] = 'Escritores Fantasma';
-$string['ghostwriter_enabled'] = 'Habilitar la verificación de Escritores Fantasma';
+$string['ghostwriter_enabled'] = 'Habilitar la verificación del escritor fantasma';
 $string['ghostwriter_failed_message'] = 'No se puede realizar la verificación de escritores fantasma para texto en línea';
 $string['pdf:filename'] = 'Ver informe de originalidad';
 $string['default_settings_assignments'] = 'Habilitar la verificación para nuevas tareas';
