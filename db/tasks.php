@@ -33,7 +33,7 @@ $tasks = [
                 'hour' => '*',
                 'day' => '*',
                 'month' => '*',
-                'dayofweek' => '*'
+                'dayofweek' => '*',
         ],
         [
                 'classname' => 'plagiarism_originality\task\merge_reports',
@@ -42,6 +42,6 @@ $tasks = [
                 'hour' => '*',
                 'day' => '*',
                 'month' => '*',
-                'dayofweek' => '*'
+                'dayofweek' => '*',
         ],
 ];
