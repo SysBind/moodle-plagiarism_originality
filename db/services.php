@@ -32,7 +32,7 @@ $services = [
                 ],
                 'restrictedusers' => 0,
                 'enabled' => 1,
-        ]
+        ],
 ];
 
 $functions = [
@@ -41,5 +41,5 @@ $functions = [
                 'methodname' => 'create_report',
                 'description' => 'Create a new report for user.',
                 'type' => 'write',
-        ]
+        ],
 ];

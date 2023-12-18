@@ -84,7 +84,7 @@ class plagiarism_originality_external extends external_api {
         $output->error = false;
 
         $submission = $DB->get_record('plagiarism_originality_sub', [
-                'docid' => $params['docId']
+                'docid' => $params['docId'],
         ]);
 
         if (!$submission) {
@@ -118,6 +118,6 @@ class plagiarism_originality_external extends external_api {
     public static function create_report_returns() {
         return new external_single_structure([
                 'error' => new external_value(PARAM_BOOL, 'Indicates whether an error occurred during the operation.', true)
-        ]);
+        ],);
     }
 }

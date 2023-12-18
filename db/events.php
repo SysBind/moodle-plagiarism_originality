@@ -36,5 +36,5 @@ $observers = [
         [
                 'eventname' => '\mod_assign\event\assessable_submitted',
                 'callback' => 'plagiarism_originality_observer::assignsubmission_submitted',
-        ]
+        ],
 ];

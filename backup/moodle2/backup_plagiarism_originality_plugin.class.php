@@ -42,7 +42,7 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
                 'originality_mod',
                 ['id'],
                 [
-                        'cm', 'ischeck', 'ischeckgw'
+                        'cm', 'ischeck', 'ischeckgw',
                 ]
         );
 
@@ -52,7 +52,7 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
                 ['id'],
                 [
                         'assignment', 'cm', 'userid', 'docid', 'ghostwriter', 'filesubmited', 'filename', 'fileid',
-                        'status', 'grade', 'attempts', 'created', 'updated', 'objectid', 'parent'
+                        'status', 'grade', 'attempts', 'created', 'updated', 'objectid', 'parent',
                 ]
         );
 
