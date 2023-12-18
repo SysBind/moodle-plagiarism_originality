@@ -172,13 +172,19 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         } else {
 
             if ($output->userid) {
-                $status = $DB->get_record_sql('SELECT s.status
+                $status = $DB->get_record_sql('SELECT s.status, s.assignment
                                 FROM {assign_submission} s
                                 LEFT JOIN {course_modules} m ON m.instance = s.assignment
                                 WHERE m.id = ? AND s.userid = ? AND s.latest = 1', [$output->cmid, $output->userid]);
 
                 if ($status && $status->status == 'draft') {
                     return;
+                }
+
+                if ($onlinetext = $DB->get_record('assignsubmission_onlinetext', ['assignment' => $status->assignment])) {
+                    if (!$onlinetext->onlinetext) {
+                        $status->status = 'empty';
+                    }
                 }
 
                 if ($status && $status->status == 'submitted') {
