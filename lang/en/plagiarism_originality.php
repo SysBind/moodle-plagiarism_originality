@@ -41,7 +41,7 @@ $string['checking_inprocessmsg'] = 'In progress';
 $string['checking_unprocessable'] = 'Unprocessable';
 $string['submitted_before_activation'] = 'Submitted before plugin activation';
 $string['service_is_inactive'] = 'Originality plugin is inactive. please contact your moodle administrator.';
-$string['warning_message'] = "You must check the consent box ('i am aware and agree') to enable the submit button.";
+$string['warning_message'] = "You must check the consent box ('I am aware and agree') to enable the submit button.";
 $string['previous_submissions'] =
         'Existing submissions already made. these students need to resubmit for their work to be checked for originality.';
 $string['production_endpoint'] =
