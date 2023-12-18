@@ -103,7 +103,7 @@ class provider implements
         if (empty($userid)) {
             return;
         }
-        $user = $DB->get_record('user', array('id' => $userid));
+        $user = $DB->get_record('user', ['id' => $userid]);
         $params = ['userid' => $user->id, 'cm' => $context->instanceid];
         $sql = "SELECT id,
                 cm,

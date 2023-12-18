@@ -56,7 +56,7 @@ class merge_reports extends \core\task\scheduled_task {
         global $DB, $CFG;
 
         $lib = new \plagiarism_plugin_originality();
-        $submissions = $DB->get_records('plagiarism_originality_sub', array('docid' => 0), 'updated DESC', '*', 0, 100);
+        $submissions = $DB->get_records('plagiarism_originality_sub', ['docid' => 0], 'updated DESC', '*', 0, 100);
 
         if (!$submissions) {
             mtrace('Task: There are no submissions to merge.');
@@ -65,11 +65,11 @@ class merge_reports extends \core\task\scheduled_task {
         foreach ($submissions as $submission) {
 
             if (!$submission->cm && $submission->assignment) {
-                $assign = $DB->get_record('assign', array('id' => $submission->assignment));
+                $assign = $DB->get_record('assign', ['id' => $submission->assignment]);
 
                 if ($assign) {
                     $cm = $DB->get_record('course_modules',
-                            array('instance' => $submission->assignment, 'course' => $assign->course));
+                            ['instance' => $submission->assignment, 'course' => $assign->course]);
                     $submission->cm = $cm->id;
 
                     mtrace('Task: Locate missing CMID instance #' . $submission->cm);

@@ -210,7 +210,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
     public function print_disclosure($cmid) {
         global $OUTPUT, $PAGE, $DB;
 
-        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cmid));
+        $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $cmid]);
         if ($PAGE->pagetype == 'mod-forum-post' ||
                 !$this->utils->is_enabled() || !$existing) {
             return;
@@ -234,7 +234,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 get_string('student_disclosure', 'plagiarism_originality') . '</label></div>';
         $output .= html_writer::end_div();
 
-        $output .= html_writer::start_div('core-notification', array('style' => 'display: none;'));
+        $output .= html_writer::start_div('core-notification', ['style' => 'display: none;']);
         $output .= '<msg>' . get_string('warning_message', 'plagiarism_originality') . '</msg>';
         $output .= '<btn>' . get_string('continue') . '</btn>';
         $output .= html_writer::end_div();
@@ -249,7 +249,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
      * @return array An array of allowed file extensions.
      */
     public function allowed_file_extensions() {
-        return array('txt', 'rtf', 'doc', 'docx', 'pdf');
+        return ['txt', 'rtf', 'doc', 'docx', 'pdf'];
     }
 
     /**
@@ -261,11 +261,11 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
     public function make_call($data) {
         global $CFG, $DB;
 
-        $user = $DB->get_record('user', array('id' => $data->userid));
+        $user = $DB->get_record('user', ['id' => $data->userid]);
         $data->content = base64_encode($data->content);
         $data->TZhash = md5($user->username);
 
-        $raw = array(
+        $raw = [
                 'FileName' => $data->filename,
                 'SenderIP' => $CFG->wwwroot,
                 'FacultyCode' => $data->facultycode,
@@ -285,23 +285,23 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 'GhostWriterCheck' => $data->ghostwritercheck,
                 'LinkMoodleFile' => $data->filepath,
                 'TZhash' => $data->TZhash
-        );
+        ];
 
         $url = $this->utils->get_server() . 'documents';
         $jsondata = json_encode($raw);
 
-        $options = array(
+        $options = [
                 'RETURNTRANSFER' => true,
                 'CURLOPT_MAXREDIRS' => 10,
                 'CURLOPT_TIMEOUT' => 30,
 
-        );
+        ];
 
-        $header = array(
+        $header = [
                 'authorization: ' . $this->utils->config->secret,
                 'cache-control: no-cache',
                 'content-type: application/json'
-        );
+        ];
 
         $curl = new curl();
         $curl->setHeader($header);
@@ -310,10 +310,10 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
 
         if (isset($output->Id)) {
             $context = context_course::instance($data->courseid);
-            $event = \plagiarism_originality\event\document_submitted::create(array(
+            $event = \plagiarism_originality\event\document_submitted::create([
                     'objectid' => $data->cmid,
                     'context' => $context,
-                    'userid' => $data->userid));
+                    'userid' => $data->userid]);
             $event->trigger();
 
             return $output->Id;
@@ -331,11 +331,11 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
     public function group_require($eventdata) {
         global $DB;
 
-        $submission = $DB->get_record('assign_submission', array('id' => $eventdata['objectid']));
-        $assign = $DB->get_record('assign', array('id' => $submission->assignment));
+        $submission = $DB->get_record('assign_submission', ['id' => $eventdata['objectid']]);
+        $assign = $DB->get_record('assign', ['id' => $submission->assignment]);
 
         if ($submission && $assign && $assign->requireallteammemberssubmit) {
-            $groupmembers = $DB->get_records('groups_members', array('groupid' => $submission->groupid));
+            $groupmembers = $DB->get_records('groups_members', ['groupid' => $submission->groupid]);
 
             $groupmemberids = array_column($groupmembers, 'userid');
             $submittedmemberids =
@@ -343,7 +343,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                             'latest = 1 AND' .
                             'status = \'submitted\' AND' .
                             'userid IN (?)',
-                            array($submission->assignment, $groupmemberids));
+                            [$submission->assignment, $groupmemberids]);
 
             if (count($submittedmemberids) != count($groupmembers)) {
                 return false;
@@ -422,7 +422,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             return $result;
         }
 
-        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $eventdata['contextinstanceid']));
+        $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $eventdata['contextinstanceid']]);
         if ($existing && $existing->ischeck) {
             $modulecontext = context_module::instance($eventdata['contextinstanceid']);
             $fs = get_file_storage();
@@ -499,7 +499,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         }
 
         if ($eventdata['eventname'] == '\mod_assign\event\assessable_submitted') {
-            $assign = $DB->get_record('assignsubmission_onlinetext', array('submission' => $eventdata['objectid']));
+            $assign = $DB->get_record('assignsubmission_onlinetext', ['submission' => $eventdata['objectid']]);
             if ($assign && $assign->onlinetext) {
                 $content = $assign->onlinetext;
                 if (!$content) {
@@ -510,7 +510,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             return $result;
         }
 
-        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $eventdata['contextinstanceid']));
+        $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $eventdata['contextinstanceid']]);
         if ($existing && $existing->ischeck) {
 
             $params = $this->get_submission_params($eventdata);
@@ -520,7 +520,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             }
 
             if ($this->utils->is_enabled()) {
-                $assignsubmission = $DB->get_record('assign_submission', array('id' => $eventdata['objectid']));
+                $assignsubmission = $DB->get_record('assign_submission', ['id' => $eventdata['objectid']]);
                 if ($assignsubmission) {
                     $data = new stdClass();
                     $data->assignment = $params->assignnum;
@@ -579,7 +579,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $params->groupsize = 1;
         $params->groupmembers = $this->get_group_users($eventdata);
 
-        $course = $DB->get_record('course', array('id' => $params->courseid), '*', MUST_EXIST);
+        $course = $DB->get_record('course', ['id' => $params->courseid], '*', MUST_EXIST);
         $tmpcourse = new core_course_list_element($course);
         $coursecontacts = $tmpcourse->get_course_contacts();
 
@@ -587,14 +587,14 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $params->lectid = reset($coursecontacts)['user']->id;
         }
 
-        $course = $DB->get_record('course', array('id' => $params->courseid));
-        $coursecategory = $DB->get_record('course_categories', array('id' => $course->category));
+        $course = $DB->get_record('course', ['id' => $params->courseid]);
+        $coursecategory = $DB->get_record('course_categories', ['id' => $course->category]);
 
         $params->coursename = $course->fullname;
         $params->coursecategory = $coursecategory->name;
 
         if (!isset($eventdata['assignNum'])) {
-            $cm = $DB->get_record('course_modules', array('id' => $params->cmid, 'course' => $params->courseid));
+            $cm = $DB->get_record('course_modules', ['id' => $params->cmid, 'course' => $params->courseid]);
             if ($cm) {
                 $params->assignnum = $cm->instance;
             }
@@ -602,10 +602,10 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $params->assignnum = $eventdata['assignNum'];
         }
 
-        $assign = $DB->get_record('assign', array('id' => $params->assignnum), 'id', IGNORE_MISSING);
+        $assign = $DB->get_record('assign', ['id' => $params->assignnum], 'id', IGNORE_MISSING);
         $params->realassignnum = ($assign) ? $assign->id : null;
 
-        $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $params->cmid));
+        $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $params->cmid]);
         $params->ghostwritercheck = ($existing && $existing->ischeckgw) ? 1 : 0;
 
         return $params;
@@ -627,14 +627,14 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             $assign = new assign($context, $cm, $course);
             $cmod = $assign->get_instance();
 
-            $names = array();
+            $names = [];
             if ($cmod && $cmod->teamsubmission) {
                 $allgroups = $assign->get_all_groups($userid);
                 if ($allgroups) {
 
                     $submissiongroup = $assign->get_submission_group($userid);
                     if ($submissiongroup) {
-                        $groupusers = $DB->get_records('groups_members', array('groupid' => $submissiongroup->id));
+                        $groupusers = $DB->get_records('groups_members', ['groupid' => $submissiongroup->id]);
                         $userids = array_column($groupusers, 'userid');
                         $users = $DB->get_records_list('user', 'id', $userids);
 
@@ -707,7 +707,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             require_once($CFG->dirroot . '/mod/assign/locallib.php');
 
             list ($course, $cm) = get_course_and_cm_from_cmid($eventdata['contextinstanceid'], 'assign');
-            $assign = $DB->get_record('assign', array('id' => $cm->instance));
+            $assign = $DB->get_record('assign', ['id' => $cm->instance]);
             return $assign;
         }
     }
@@ -749,7 +749,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
 
         if ($cmid) {
             list ($course, $cm) = get_course_and_cm_from_cmid($cmid, 'assign');
-            $hassubmissions = $DB->get_records('assign_submission', array('assignment' => $cm->instance));
+            $hassubmissions = $DB->get_records('assign_submission', ['assignment' => $cm->instance]);
 
             if ($hassubmissions) {
                 $hassubmissions = get_string('previous_submissions', 'plagiarism_originality');
@@ -759,13 +759,13 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
         }
 
         if (isset($cm)) {
-            $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $cm->id));
+            $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $cm->id]);
         }
 
         $mform->addElement('header', 'originalitydesc', get_string('originality', 'plagiarism_originality'));
         $mform->addHelpButton('originalitydesc', 'originality', 'plagiarism_originality');
         $mform->addElement('select', 'originality_use', get_string('plugin_enabled', 'plagiarism_originality'),
-                array(0 => get_string('no'), 1 => get_string('yes')));
+                [0 => get_string('no'], 1 => get_string('yes')));
         $mform->setDefault('originality_use', 0);
 
         if (isset($existing) && $existing->ischeck) {
@@ -797,7 +797,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
             $mform->addElement('header', 'originality_ghostwriter_desc', get_string('check_ghostwriter', 'plagiarism_originality'));
             $mform->addHelpButton('originality_ghostwriter_desc', 'check_ghostwriter', 'plagiarism_originality');
             $mform->addElement('select', 'originality_use_ghostwriter', get_string('ghostwriter_enabled', 'plagiarism_originality'),
-                    array(0 => get_string('no'), 1 => get_string('yes')));
+                    [0 => get_string('no'], 1 => get_string('yes')));
 
             if ($existing && $existing->ischeckgw) {
                 $mform->setDefault('originality_use_ghostwriter', 1);
@@ -818,7 +818,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
 function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
     global $DB;
 
-    $existing = $DB->get_record('plagiarism_originality_mod', array('cm' => $data->coursemodule));
+    $existing = $DB->get_record('plagiarism_originality_mod', ['cm' => $data->coursemodule]);
     if (!$existing) {
 
         $current = new stdClass();
@@ -848,7 +848,7 @@ function plagiarism_originality_coursemodule_edit_post_actions($data, $course) {
  * @param array $options additional options affecting the file serving
  * @return bool false if the file not found, just send the file otherwise and do not return anything
  */
-function plagiarism_originality_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function plagiarism_originality_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
 
     // Check the contextlevel is as expected - if your plugin is a block, this becomes CONTEXT_BLOCK, etc.
     if ($context->contextlevel != CONTEXT_MODULE) {

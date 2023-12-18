@@ -45,13 +45,13 @@ class plagiarism_plugin_originality_utils {
         $fs = get_file_storage();
         $context = \context_module::instance($data->cm);
 
-        $fileinfo = array(
+        $fileinfo = [
                 'contextid' => $context->id,
                 'component' => 'plagiarism_originality',
                 'filearea' => 'reports',
                 'itemid' => $data->itemid,
                 'filepath' => '/',
-                'filename' => 'report.pdf');
+                'filename' => 'report.pdf'];
 
         // Get file.
         $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
@@ -78,11 +78,11 @@ class plagiarism_plugin_originality_utils {
         $fs = get_file_storage();
 
         if (!$data->cm && $data->assignment) {
-            $assign = $DB->get_record('assign', array('id' => $data->assignment));
+            $assign = $DB->get_record('assign', ['id' => $data->assignment]);
 
             if ($assign) {
                 $cm = $DB->get_record('course_modules',
-                        array('instance' => $data->assignment, 'course' => $assign->course));
+                        ['instance' => $data->assignment, 'course' => $assign->course]);
                 $data->cm = $cm->id;
             }
 
@@ -96,13 +96,13 @@ class plagiarism_plugin_originality_utils {
 
         $context = \context_module::instance($data->cm);
         // Prepare file record object.
-        $fileinfo = array(
+        $fileinfo = [
                 'contextid' => $context->id,
                 'component' => 'plagiarism_originality',
                 'filearea' => 'reports',
                 'itemid' => $data->id,
                 'filepath' => '/',
-                'filename' => 'report.pdf');
+                'filename' => 'report.pdf'];
 
         // Get file.
         $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'],
@@ -126,20 +126,20 @@ class plagiarism_plugin_originality_utils {
         }
 
         $url = $this->get_server() . 'customers/ping';
-        $options = array(
+        $options = [
                 'RETURNTRANSFER' => true,
                 'CURLOPT_MAXREDIRS' => 10,
                 'CURLOPT_TIMEOUT' => 30,
-        );
+        ];
 
-        $header = array(
+        $header = [
                 'authorization: ' . $this->config->secret,
                 'cache-control: no-cache',
-        );
+        ];
 
         $curl = new curl();
         $curl->setHeader($header);
-        $jsonresult = $curl->get($url, array(), $options);
+        $jsonresult = $curl->get($url, [], $options);
         $output = json_decode($jsonresult, true);
 
         if (!isset($output)) {
@@ -166,27 +166,27 @@ class plagiarism_plugin_originality_utils {
             return false;
         }
 
-        $data = array(
+        $data = [
                 'apiKey' => $this->config->secret,
                 'MoodleToken' => $this->config->wstoken,
                 'MoodleURL' => $CFG->wwwroot,
                 'IsUpdate' => 1
-        );
+        ];
 
         $url = $this->get_server() . 'reports';
         $jsondata = json_encode($data);
 
-        $options = array(
+        $options = [
                 'RETURNTRANSFER' => true,
                 'CURLOPT_MAXREDIRS' => 10,
                 'CURLOPT_TIMEOUT' => 30,
-        );
+        ];
 
-        $header = array(
+        $header = [
                 'authorization: ' . $this->config->secret,
                 'cache-control: no-cache',
                 'content-type: application/json',
-        );
+        ];
 
         $curl = new curl();
         $curl->setHeader($header);
@@ -208,10 +208,10 @@ class plagiarism_plugin_originality_utils {
      */
     public function get_course($assignmentid) {
         global $DB;
-        $assignment = $DB->get_record('assign', array('id' => $assignmentid));
+        $assignment = $DB->get_record('assign', ['id' => $assignmentid]);
 
         if ($assignment) {
-            $course = $DB->get_record('course', array('id' => $assignment->course));
+            $course = $DB->get_record('course', ['id' => $assignment->course]);
         }
 
         if ($course) {
@@ -228,12 +228,12 @@ class plagiarism_plugin_originality_utils {
      */
     public function get_submission_id($assignmentid, $userid) {
         global $DB;
-        $submission = $DB->get_record('assign_submission', array('assignment' => $assignmentid, 'userid' => $userid), 'id');
+        $submission = $DB->get_record('assign_submission', ['assignment' => $assignmentid, 'userid' => $userid], 'id');
 
         if ($submission) {
-            return array($submission->id);
+            return [$submission->id];
         } else {
-            return array();
+            return [];
         }
     }
 

@@ -56,7 +56,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
         global $DB;
 
         $lib = new \plagiarism_plugin_originality();
-        $submissions = $DB->get_records('plagiarism_originality_sub', array('status' => 0), 'updated DESC', '*', 0, 10);
+        $submissions = $DB->get_records('plagiarism_originality_sub', ['status' => 0], 'updated DESC', '*', 0, 10);
 
         $tmp = [];
         if (!$submissions) {
@@ -86,15 +86,15 @@ class resubmit_submissions extends \core\task\scheduled_task {
                 return true;
             }
 
-            $moduleassign = $DB->get_record('modules', array('name' => 'assign'));
+            $moduleassign = $DB->get_record('modules', ['name' => 'assign']);
             $cm = $DB->get_record('course_modules',
-                    array('instance' => $submission->assignment, 'course' => $course->id, 'module' => $moduleassign->id));
+                    ['instance' => $submission->assignment, 'course' => $course->id, 'module' => $moduleassign->id]);
 
             if (!$cm) {
                 return true;
             }
 
-            $eventdata = array();
+            $eventdata = [];
             $eventdata['eventname'] = '\mod_assign\event\assessable_submitted';
             $eventdata['contextinstanceid'] = $cm->id;
             $eventdata['objectid'] = $submission->objectid;
@@ -104,7 +104,7 @@ class resubmit_submissions extends \core\task\scheduled_task {
 
             if ($submission->fileid < 0) {
                 $onlinetext = $DB->get_record('assignsubmission_onlinetext',
-                        array('assignment' => $submission->assignment, 'submission' => $submissionid[0]));
+                        ['assignment' => $submission->assignment, 'submission' => $submissionid[0]]);
 
                 if ($onlinetext) {
                     $eventdata['other']['content'] = $onlinetext->onlinetext;

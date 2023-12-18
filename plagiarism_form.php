@@ -44,18 +44,18 @@ class plagiarism_setup_form extends moodleform {
 
         $mform->addElement('header', 'plagiarism_originalityconfig', get_string('plugin_settings', 'plagiarism_originality'));
 
-        $radioarray = array();
+        $radioarray = [];
         $radioarray[] =
                 $mform->createElement('radio', 'server', '', get_string('production_endpoint', 'plagiarism_originality'), 'live');
         $radioarray[] = $mform->createElement('radio', 'server', '', get_string('test_endpoint', 'plagiarism_originality'), 'test');
 
         $mform->setDefault('server', 'live');
-        $mform->addGroup($radioarray, 'radioar', get_string('plugin_server_type', 'plagiarism_originality'), array('<br /><br />'),
+        $mform->addGroup($radioarray, 'radioar', get_string('plugin_server_type', 'plagiarism_originality'), ['<br /><br />'],
                 false);
         $mform->addRule('radioar', null, 'required');
         $mform->setType('plugin_server_type', PARAM_NOTAGS);
 
-        $mform->addElement('passwordunmask', 'secret', get_string('secret', 'plagiarism_originality'), array('size' => '30'));
+        $mform->addElement('passwordunmask', 'secret', get_string('secret', 'plagiarism_originality'), ['size' => '30']);
         $mform->setType('secret', PARAM_NOTAGS);
         $mform->addHelpButton('secret', 'key', 'plagiarism_originality');
         $mform->addRule('secret', null, 'required', null, 'client');

@@ -57,11 +57,11 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
     }
 
     // Create external token.
-    $service = $DB->get_record('external_services', array('shortname' => 'plagiarism_originality_service'));
+    $service = $DB->get_record('external_services', ['shortname' => 'plagiarism_originality_service']);
 
     if ($service) {
 
-        if (!$user = $DB->get_record('user', array('idnumber' => 'originalityuser'))) {
+        if (!$user = $DB->get_record('user', ['idnumber' => 'originalityuser'])) {
             $user = new stdClass();
             $user->firstname = 'originality';
             $user->lastname = 'user';
@@ -73,14 +73,14 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
             $user->id = user_create_user($user, false, false);
         }
 
-        $role = $DB->get_record('role', array('shortname' => 'originality'));
+        $role = $DB->get_record('role', ['shortname' => 'originality']);
         if (empty($role)) {
             $roleid = create_role('Originality', 'originality', get_string('pluginname', 'plagiarism_originality'), 'originality');
         } else {
             $roleid = $role->id;
         }
 
-        set_role_contextlevels($roleid, array(CONTEXT_SYSTEM));
+        set_role_contextlevels($roleid, [CONTEXT_SYSTEM]);
         assign_capability('plagiarism/originality:manage', CAP_ALLOW, $roleid, $context->id, true);
         assign_capability('webservice/rest:use', CAP_ALLOW, $roleid, $context->id, true);
 
