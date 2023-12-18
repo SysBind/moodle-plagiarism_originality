@@ -765,7 +765,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
         $mform->addElement('header', 'originalitydesc', get_string('originality', 'plagiarism_originality'));
         $mform->addHelpButton('originalitydesc', 'originality', 'plagiarism_originality');
         $mform->addElement('select', 'originality_use', get_string('plugin_enabled', 'plagiarism_originality'),
-                [0 => get_string('no'], 1 => get_string('yes')));
+                [0 => get_string('no'), 1 => get_string('yes')]);
         $mform->setDefault('originality_use', 0);
 
         if (isset($existing) && $existing->ischeck) {
