@@ -797,7 +797,7 @@ function plagiarism_originality_coursemodule_standard_elements($formwrapper, $mf
             $mform->addElement('header', 'originality_ghostwriter_desc', get_string('check_ghostwriter', 'plagiarism_originality'));
             $mform->addHelpButton('originality_ghostwriter_desc', 'check_ghostwriter', 'plagiarism_originality');
             $mform->addElement('select', 'originality_use_ghostwriter', get_string('ghostwriter_enabled', 'plagiarism_originality'),
-                    [0 => get_string('no'], 1 => get_string('yes')));
+                    [0 => get_string('no'), 1 => get_string('yes')]);
 
             if ($existing && $existing->ischeckgw) {
                 $mform->setDefault('originality_use_ghostwriter', 1);
