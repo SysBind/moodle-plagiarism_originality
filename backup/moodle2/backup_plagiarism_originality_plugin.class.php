@@ -40,20 +40,20 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
         $mods = new backup_nested_element('originality_mods');
         $mod = new backup_nested_element(
                 'originality_mod',
-                array('id'),
-                array(
+                ['id'],
+                [
                         'cm', 'ischeck', 'ischeckgw'
-                )
+                ]
         );
 
         $subs = new backup_nested_element('originality_subs');
         $sub = new backup_nested_element(
                 'originality_sub',
-                array('id'),
-                array(
+                ['id'],
+                [
                         'assignment', 'cm', 'userid', 'docid', 'ghostwriter', 'filesubmited', 'filename', 'fileid',
                         'status', 'grade', 'attempts', 'created', 'updated', 'objectid', 'parent'
-                )
+                ]
         );
 
         $pluginelement->add_child($mods);
@@ -62,8 +62,8 @@ class backup_plagiarism_originality_plugin extends backup_plagiarism_plugin {
         $pluginelement->add_child($subs);
         $subs->add_child($sub);
 
-        $mod->set_source_table('plagiarism_originality_mod', array('cm' => backup::VAR_PARENTID));
-        $sub->set_source_table('plagiarism_originality_sub', array('cm' => backup::VAR_PARENTID));
+        $mod->set_source_table('plagiarism_originality_mod', ['cm' => backup::VAR_PARENTID]);
+        $sub->set_source_table('plagiarism_originality_sub', ['cm' => backup::VAR_PARENTID]);
 
         return $plugin;
     }

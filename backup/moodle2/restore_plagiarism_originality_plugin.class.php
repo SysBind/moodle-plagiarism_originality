@@ -31,7 +31,7 @@ class restore_plagiarism_originality_plugin extends restore_plagiarism_plugin {
      * @return array An array of restore_path_element objects representing the paths to be restored.
      */
     protected function define_module_plugin_structure() {
-        $paths = array();
+        $paths = [];
         $paths[] = new restore_path_element('originality_mods', $this->get_pathfor('originality_mods/originality_mod'));
         $paths[] = new restore_path_element('originality_subs', $this->get_pathfor('originality_subs/originality_sub'));
 

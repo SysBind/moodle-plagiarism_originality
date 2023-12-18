@@ -64,7 +64,7 @@ class provider implements
         ], 'privacy:metadata:plagiarism_originality_sub');
 
         $collection->add_external_location_link('plagiarism_originality', [
-                'data' => 'privacy:metadata:originality:data'
+                'data' => 'privacy:metadata:originality:data',
         ], 'privacy:metadata:originality:externalpurpose');
 
         return $collection;
@@ -79,7 +79,7 @@ class provider implements
     public static function get_contexts_for_userid($userid): contextlist {
         $params = [
                 'contextlevel' => CONTEXT_MODULE,
-                'userid' => $userid
+                'userid' => $userid,
         ];
         $sql = "SELECT DISTINCT c.id
                 FROM {context} c

@@ -118,7 +118,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
             if ($output->userid == 0 && $token) {
                 $groups = $DB->get_records('plagiarism_originality_grp', [
                         'token' => $token,
-                        'assignment' => $output->cm->instance
+                        'assignment' => $output->cm->instance,
                 ], 'id DESC', 'id, userid', 0, 1);
                 if ($groups) {
                     foreach ($groups as $group) {
@@ -284,7 +284,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 'file' => $data->content,
                 'GhostWriterCheck' => $data->ghostwritercheck,
                 'LinkMoodleFile' => $data->filepath,
-                'TZhash' => $data->TZhash
+                'TZhash' => $data->TZhash,
         ];
 
         $url = $this->utils->get_server() . 'documents';
@@ -300,7 +300,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
         $header = [
                 'authorization: ' . $this->utils->config->secret,
                 'cache-control: no-cache',
-                'content-type: application/json'
+                'content-type: application/json',
         ];
 
         $curl = new curl();

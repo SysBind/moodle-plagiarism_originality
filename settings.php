@@ -93,7 +93,7 @@ if (($data = $form->get_data()) && confirm_sesskey()) {
         $conditions = [
                 'userid' => $user->id,
                 'externalserviceid' => $service->id,
-                'tokentype' => EXTERNAL_TOKEN_PERMANENT
+                'tokentype' => EXTERNAL_TOKEN_PERMANENT,
         ];
 
         // Check existing tokens.

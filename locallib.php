@@ -170,7 +170,7 @@ class plagiarism_plugin_originality_utils {
                 'apiKey' => $this->config->secret,
                 'MoodleToken' => $this->config->wstoken,
                 'MoodleURL' => $CFG->wwwroot,
-                'IsUpdate' => 1
+                'IsUpdate' => 1,
         ];
 
         $url = $this->get_server() . 'reports';

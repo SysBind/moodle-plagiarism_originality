@@ -24,22 +24,22 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$services = array(
-        'Originality Service' => array(
+$services = [
+        'Originality Service' => [
                 'shortname' => 'plagiarism_originality_service',
-                'functions' => array(
+                'functions' => [
                         'plagiarism_originality_external_create_report',
-                ),
+                ],
                 'restrictedusers' => 0,
                 'enabled' => 1,
-        )
-);
+        ]
+];
 
-$functions = array(
-        'plagiarism_originality_external_create_report' => array(
+$functions = [
+        'plagiarism_originality_external_create_report' => [
                 'classname' => 'plagiarism_originality_external',
                 'methodname' => 'create_report',
                 'description' => 'Create a new report for user.',
                 'type' => 'write',
-        )
-);
+        ]
+];

@@ -24,17 +24,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = array(
-        array(
+$observers = [
+        [
                 'eventname' => '\assignsubmission_file\event\assessable_uploaded',
-                'callback' => 'plagiarism_originality_observer::assignsubmission_file_uploaded'
-        ),
-        array(
+                'callback' => 'plagiarism_originality_observer::assignsubmission_file_uploaded',
+        ],
+        [
                 'eventname' => '\assignsubmission_onlinetext\event\assessable_uploaded',
-                'callback' => 'plagiarism_originality_observer::assignsubmission_onlinetext_uploaded'
-        ),
-        array(
+                'callback' => 'plagiarism_originality_observer::assignsubmission_onlinetext_uploaded',
+        ],
+        [
                 'eventname' => '\mod_assign\event\assessable_submitted',
-                'callback' => 'plagiarism_originality_observer::assignsubmission_submitted'
-        )
-);
+                'callback' => 'plagiarism_originality_observer::assignsubmission_submitted',
+        ]
+];

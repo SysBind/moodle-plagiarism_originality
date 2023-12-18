@@ -25,8 +25,8 @@
 namespace plagiarism_originality\task;
 defined('MOODLE_INTERNAL') || die();
 
-$tasks = array(
-        array(
+$tasks = [
+        [
                 'classname' => 'plagiarism_originality\task\resubmit_submissions',
                 'blocking' => 0,
                 'minute' => '*',
@@ -34,8 +34,8 @@ $tasks = array(
                 'day' => '*',
                 'month' => '*',
                 'dayofweek' => '*'
-        ),
-        array(
+        ],
+        [
                 'classname' => 'plagiarism_originality\task\merge_reports',
                 'blocking' => 0,
                 'minute' => '*/10',
@@ -43,5 +43,5 @@ $tasks = array(
                 'day' => '*',
                 'month' => '*',
                 'dayofweek' => '*'
-        )
-);
+        ]
+];
