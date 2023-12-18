@@ -118,7 +118,8 @@ class plagiarism_originality_external extends external_api {
     public static function create_report_returns() {
         return new external_single_structure(
                 [
-                        'error' => new external_value(PARAM_BOOL, 'Indicates whether an error occurred during the operation.', true)
+                        'error' => new external_value(PARAM_BOOL, 'Indicates whether an error occurred during the operation.',
+                                true),
                 ],
         );
     }
