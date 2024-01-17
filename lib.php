@@ -275,7 +275,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                 'CourseCategory' => $data->coursecategory,
                 'CourseCode' => $data->courseid,
                 'CourseName' => $data->coursename,
-                'AssignmentCode' => $data->assignnum,
+                'AssignmentCode' => $data->cmid,
                 'MoodleAssignPageNo' => $data->realassignnum,
                 'StudentCode' => $data->userid,
                 'LecturerCode' => $data->lectid,
