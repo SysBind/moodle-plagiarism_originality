@@ -243,7 +243,7 @@ class plagiarism_plugin_originality_utils {
      * @return string The server URL.
      */
     public function get_server() {
-        $server = 'http://40.115.61.181/rest/v2/api/';
+        $server = 'https://originality-westeurope-ea-test.azurewebsites.net/';
 
         if ($this->config->server == 'live') {
             $server = 'https://originality-westeurope-ea-prod-iis.azurewebsites.net/';
