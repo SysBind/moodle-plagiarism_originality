@@ -470,9 +470,9 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                             $types[] = 1;
                         }
 
-                        foreach ($types as $type){
-                            $uploadresult = $this->make_call($params);
+                        $uploadresult = $this->make_call($params);
 
+                        foreach ($types as $type){
                             if (!$resubmission) {
                                 $this->add_document($params->assignnum, $params->userid, $filename,
                                         $fileid, $uploadresult, $type, $eventdata['objectid'], $params->cmid);
