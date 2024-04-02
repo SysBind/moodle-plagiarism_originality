@@ -52,6 +52,7 @@ class plagiarism_originality_external extends external_api {
                 'docId' => new external_value(PARAM_ALPHANUM, 'A document ID value for ordering the entries.'),
                 'content' => new external_value(PARAM_RAW, 'The main content of the entry.'),
                 'grade' => new external_value(PARAM_INT, 'The grade or rating associated with the entry.'),
+                'type' => new external_value(PARAM_INT, 'The type report associated with the entry.'),
         ]);
     }
 
@@ -64,15 +65,17 @@ class plagiarism_originality_external extends external_api {
      * @param int $docid The ID of the document for which the report is created.
      * @param string $content The content of the report.
      * @param int $grade The grade assigned to the document.
+     * @param int $type The type report associated with the entry.
      * @return stdClass The output object containing the created report information.
      */
-    public static function create_report($docid, $content, $grade) {
+    public static function create_report($docid, $content, $grade, $type) {
         global $DB;
 
         $params = self::validate_parameters(self::create_report_parameters(), [
                 'docId' => $docid,
                 'content' => $content,
                 'grade' => $grade,
+                'type' => $type
         ]);
 
         $context = context_system::instance();
@@ -85,6 +88,7 @@ class plagiarism_originality_external extends external_api {
 
         $submission = $DB->get_record('plagiarism_originality_sub', [
                 'docid' => $params['docId'],
+                'ghostwriter' => $params['type']
         ]);
 
         if (!$submission) {
