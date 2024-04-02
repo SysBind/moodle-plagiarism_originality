@@ -475,7 +475,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
 
                             if (!$resubmission) {
                                 $this->add_document($params->assignnum, $params->userid, $filename,
-                                        $fileid, $uploadresult, $params->ghostwritercheck, $eventdata['objectid'], $params->cmid);
+                                        $fileid, $uploadresult, $type, $eventdata['objectid'], $params->cmid);
                             }
                         }
                     }
