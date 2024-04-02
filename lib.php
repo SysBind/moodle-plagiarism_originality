@@ -463,11 +463,20 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                         $params->filename = $filename;
                         $params->filepath = $filepath;
 
-                        $uploadresult = $this->make_call($params);
+                        $types = [];
+                        $types[] = 0;
 
-                        if (!$resubmission) {
-                            $this->add_document($params->assignnum, $params->userid, $filename,
-                                    $fileid, $uploadresult, $params->ghostwritercheck, $eventdata['objectid'], $params->cmid);
+                        if ($params->ghostwritercheck) {
+                            $types[] = 1;
+                        }
+
+                        foreach ($types as $type){
+                            $uploadresult = $this->make_call($params);
+
+                            if (!$resubmission) {
+                                $this->add_document($params->assignnum, $params->userid, $filename,
+                                        $fileid, $uploadresult, $params->ghostwritercheck, $eventdata['objectid'], $params->cmid);
+                            }
                         }
                     }
                 }
