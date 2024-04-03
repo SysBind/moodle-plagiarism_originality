@@ -52,7 +52,7 @@ class plagiarism_originality_external extends external_api {
                 'docId' => new external_value(PARAM_ALPHANUM, 'A document ID value for ordering the entries.'),
                 'content' => new external_value(PARAM_RAW, 'The main content of the entry.'),
                 'grade' => new external_value(PARAM_INT, 'The grade or rating associated with the entry.'),
-                'type' => new external_value(PARAM_INT, 'The type report associated with the entry.'),
+                'type' => new external_value(PARAM_INT, 'The type report associated with the entry.', false, 0),
         ]);
     }
 
