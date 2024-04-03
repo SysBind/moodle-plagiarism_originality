@@ -154,6 +154,10 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                         $output->html .= get_string('checking_unprocessable', 'plagiarism_originality');
                     } else if ($submission->grade > 950) {
                         $output->html .= get_string('checking_unprocessable', 'plagiarism_originality') . ' ' . $submission->grade;
+                    } else if ($submission->grade == 0) {
+                        $output->html .= get_string('checking_unprocessable', 'plagiarism_originality') . ' ';
+                        $output->html .= html_writer::link($this->utils->get_file($submission),
+                                round($submission->grade) . '%');
                     } else {
                         $output->html .= html_writer::link($this->utils->get_file($submission),
                                 round($submission->grade) . '%');
@@ -472,7 +476,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
 
                         $uploadresult = $this->make_call($params);
 
-                        foreach ($types as $type){
+                        foreach ($types as $type) {
                             if (!$resubmission) {
                                 $this->add_document($params->assignnum, $params->userid, $filename,
                                         $fileid, $uploadresult, $type, $eventdata['objectid'], $params->cmid);
