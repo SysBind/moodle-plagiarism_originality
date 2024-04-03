@@ -162,7 +162,7 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                     }
 
                     if ($output->html && isset($output->pdf)) {
-                        $output->html .= '&nbsp;&nbsp;' . $output->pdf;
+                        $output->html .= '&nbsp;' . $output->pdf;
                     }
                 } else {
                     $output->html .= get_string('checking_inprocessmsg', 'plagiarism_originality') . ' <small>(' .
