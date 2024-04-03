@@ -156,8 +156,6 @@ class plagiarism_plugin_originality extends plagiarism_plugin {
                         $output->html .= get_string('checking_unprocessable', 'plagiarism_originality') . ' ' . $submission->grade;
                     } else if ($submission->grade == 0) {
                         $output->html .= get_string('checking_unprocessable', 'plagiarism_originality') . ' ';
-                        $output->html .= html_writer::link($this->utils->get_file($submission),
-                                round($submission->grade) . '%');
                     } else {
                         $output->html .= html_writer::link($this->utils->get_file($submission),
                                 round($submission->grade) . '%');
