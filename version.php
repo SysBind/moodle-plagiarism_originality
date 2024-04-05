@@ -34,4 +34,4 @@ $plugin = new stdClass();
 $plugin->version = 2024031200;
 $plugin->requires = 2016061505;
 $plugin->component = 'plagiarism_originality';
-$plugin->release = '7.0.9';
+$plugin->release = '7.1';
